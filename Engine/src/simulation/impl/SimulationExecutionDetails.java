@@ -2,7 +2,7 @@ package simulation.impl;
 
 import entity.instance.EntityInstanceManager;
 import grid.Grid;
-import manager.PredictionManager;
+import manager.LoadedFileManager;
 import option3.EntityPopulationDTO;
 import option3.EnvironmentInitDTO;
 import property.instance.AbstractPropertyInstance;
@@ -29,7 +29,7 @@ public class SimulationExecutionDetails {
     private Integer seconds;
     private SimulationState simulationState;
     private volatile boolean isRunning = true;
-    private PredictionManager predictionManager;
+    private LoadedFileManager loadedFileManager;
     private String failCause;
 
     public SimulationExecutionDetails(Map<String, EntityInstanceManager> entityManager, Map<String, AbstractPropertyInstance> environments,Grid grid, List<Rule> rules, Termination termination, int identifyNumber) {
@@ -76,8 +76,8 @@ public class SimulationExecutionDetails {
         isRunning = running;
     }
 
-    public void setPredictionManager(PredictionManager predictionManager) {
-        this.predictionManager = predictionManager;
+    public void setPredictionManager(LoadedFileManager loadedFileManager) {
+        this.loadedFileManager = loadedFileManager;
     }
 
     public String getFailCause() {
@@ -88,8 +88,8 @@ public class SimulationExecutionDetails {
         this.failCause = failCause;
     }
 
-    public PredictionManager getPredictionManager() {
-        return predictionManager;
+    public LoadedFileManager getPredictionManager() {
+        return loadedFileManager;
     }
 
     public Integer getCurrTicks() {

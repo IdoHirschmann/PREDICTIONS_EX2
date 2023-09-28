@@ -1,6 +1,5 @@
 package manager;
 
-import entity.instance.EntityInstance;
 import option1.XmlFullPathDTO;
 import option2.*;
 import option3.*;
@@ -11,11 +10,10 @@ import option4.SimulationDesiredInfoDTO;
 import option4.histogram.*;
 import option56.FilePathDTO;
 
-import java.io.*;
 import java.util.*;
 
 public class UIManager {
-    private PredictionManager predictionManager = new PredictionManager();
+    private LoadedFileManager loadedFileManager = new LoadedFileManager(null);
 
     public void predictionMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -117,7 +115,7 @@ public class UIManager {
         XmlFullPathDTO xmlFullPathDTO = new XmlFullPathDTO(xmlFilePath);
 
         try {
-            predictionManager.loadXmlData(xmlFullPathDTO);
+         //   loadedFileManager.loadXmlData(xmlFullPathDTO);
             System.out.println("  XML loaded successfully!");
             System.out.println();
             return true;
@@ -130,7 +128,7 @@ public class UIManager {
 
 
     private void showCurrentSimulationData() {
-        SimulationDefinitionDTO simulationDefinitionDTO = predictionManager.showCurrentSimulationData();
+        SimulationDefinitionDTO simulationDefinitionDTO = loadedFileManager.showCurrentSimulationData();
         printEntities(simulationDefinitionDTO.getEntityDefinitionDTOList());
         printRules(simulationDefinitionDTO.getRulesDTOList());
         printTermination(simulationDefinitionDTO.getTerminationDTO());
@@ -208,7 +206,7 @@ public class UIManager {
         }
     }
     private EnvironmentDefinitionListDTO runSimulationHelper1() {
-        return predictionManager.runSimulationStep1();
+        return loadedFileManager.runSimulationStep1();
     }
     private SimulationFinishDTO runSimulationHelper2( EnvironmentDefinitionListDTO environmentDefinitionListDTO, Scanner scanner) {
         Integer environmentToInit = 1 , environmentLength = environmentDefinitionListDTO.getEnvironmentDefinitionDTOList().size();
@@ -240,7 +238,7 @@ public class UIManager {
 
         EnvironmentInitListDTO environmentsIntDTO = new EnvironmentInitListDTO(environmentInitDTOList);
 
-        return predictionManager.runSimulationStep2(null,null);
+        return loadedFileManager.runSimulationStep2(null,null, null);
     }
     private EnvironmentInitDTO createEnvironmentInit(EnvironmentDefinitionDTO environmentDefinitionDTO, boolean isNotRandom, Scanner scanner) {
         String name = environmentDefinitionDTO.getName();
@@ -411,7 +409,7 @@ public class UIManager {
 
 
     private void viewPastSimulationInfo(Scanner scanner){
-        List<PastSimulationInfoDTO> pastSimulationInfoDTO = predictionManager.createPastSimulationInfoDTOList();
+        List<PastSimulationInfoDTO> pastSimulationInfoDTO = loadedFileManager.createPastSimulationInfoDTOList();
         int i ;
         String desiredSimulation , desiredInfo;
 
@@ -469,7 +467,7 @@ public class UIManager {
         int i;
         String desiredEntity, desiredProperty;
         SimulationDesiredInfoDTO simulationDesiredInfoDTO = new SimulationDesiredInfoDTO(Integer.parseInt(desiredSimulation), InfoType.HISTOGRAM);
-        HistogramAllEntitiesDTO histogramAllEntitiesDTO = predictionManager.getAllEntitiesDTO(simulationDesiredInfoDTO);
+        HistogramAllEntitiesDTO histogramAllEntitiesDTO = loadedFileManager.getAllEntitiesDTO(simulationDesiredInfoDTO);
         HistogramSingleEntityDTO singleEntityDTO;
         HistogramSinglePropDTO singlePropDTO;
 
@@ -495,7 +493,7 @@ public class UIManager {
             }
         }while (true);
 
-        HistogramAllEntityPropsDTO allEntityPropsDTO = predictionManager.getAllEntityPropsDTO(simulationDesiredInfoDTO, singleEntityDTO);
+        HistogramAllEntityPropsDTO allEntityPropsDTO = loadedFileManager.getAllEntityPropsDTO(simulationDesiredInfoDTO, singleEntityDTO);
 
         do {
             i = 1;
@@ -519,7 +517,7 @@ public class UIManager {
             }
         }while (true);
 
-        HistogramSpecificPropDTO histogramSpecificPropDTO = predictionManager.getHistogram(singlePropDTO,simulationDesiredInfoDTO,singleEntityDTO);
+        HistogramSpecificPropDTO histogramSpecificPropDTO = loadedFileManager.getHistogram(singlePropDTO,simulationDesiredInfoDTO,singleEntityDTO);
 
         showHistogram(histogramSpecificPropDTO);
     }
@@ -540,7 +538,7 @@ public class UIManager {
 
     private void amount(String desiredSimulation) {
         SimulationDesiredInfoDTO simulationDesiredInfoDTO = new SimulationDesiredInfoDTO(Integer.parseInt(desiredSimulation), InfoType.AMOUNT);
-        AmountDTO amountDTO = predictionManager.getAmountDTO(simulationDesiredInfoDTO);
+        AmountDTO amountDTO = loadedFileManager.getAmountDTO(simulationDesiredInfoDTO);
 
         System.out.println("   Entities amount:");
         for (int i = 0; i < amountDTO.getEntityNames().size(); i++){
@@ -558,7 +556,7 @@ public class UIManager {
             System.out.print("  Please enter your full file path including the file name (without the extension): ");
             FilePathDTO filePathDTO = new FilePathDTO(scanner.nextLine() + ".txt");
 
-            predictionManager.storeDataToFile(filePathDTO);
+            loadedFileManager.storeDataToFile(filePathDTO);
             System.out.println("  File saved successfully!");
             System.out.println();
         }
@@ -577,7 +575,7 @@ public class UIManager {
                 }
                 else {
                     FilePathDTO filePathDTO = new FilePathDTO(filePath);
-                    predictionManager.loadDataFromFile(filePathDTO);
+                    loadedFileManager.loadDataFromFile(filePathDTO);
                     System.out.println("  File loaded successfully!");
                     return true;
             }

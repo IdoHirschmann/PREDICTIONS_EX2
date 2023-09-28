@@ -31,22 +31,20 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 import static factory.instance.FactoryInstance.createSimulation;
 
-public class PredictionManager {
+public class LoadedFileManager {
     private SimulationDefinition simulationDefinition;
     private Map<Integer, SimulationExecutionDetails> simulationExecutionDetailsMap;
-    private Integer numOfThreads;
-    private XmlLoader xmlLoader;
-    private ThreadPoolExecutor executorService;
     private int currIDNum;
     private Integer simDoneCounter = 0;
 
-    private Boolean isNewSimLoaded = false;
+    //  private Boolean isNewSimLoaded = false;
+    //  private Integer numOfThreads;
+    //  private XmlLoader xmlLoader;
+    //  private ThreadPoolExecutor executorService;
 
-
-    public PredictionManager() {
-        simulationDefinition = null;
+    public LoadedFileManager(SimulationDefinition simulationDefinition) {
+        this.simulationDefinition = simulationDefinition;
         simulationExecutionDetailsMap = new HashMap<>();
-        xmlLoader = new XmlLoader();
         currIDNum = 1;
     }
 
@@ -66,23 +64,6 @@ public class PredictionManager {
         } catch (Exception ignore) {
             throw new FileNotFoundException("file not found, please type a valid file path");
         }
-    }
-
-    public void loadXmlData(XmlFullPathDTO xmlFullPathDTO) throws JAXBException, IOException {
-        SimulationDefinition newSimulationDefinition = xmlLoader.loadXmlData(xmlFullPathDTO.getFullPathXML());
-        setGetIsNewSimLoaded("true");
-        if(executorService != null) {
-            executorService.getQueue().clear();
-            stopAllSimulation();
-            executorService.shutdownNow();
-        }
-
-        this.simulationDefinition = newSimulationDefinition;
-        simulationExecutionDetailsMap.clear();
-        currIDNum = 1;
-        numOfThreads = simulationDefinition.getNumOfThreads();
-        executorService = (ThreadPoolExecutor)Executors.newFixedThreadPool(numOfThreads);
-        isDoneCounterChanger("reset");
     }
 
 
@@ -106,7 +87,7 @@ public class PredictionManager {
         return new EnvironmentDefinitionListDTO(environmentDefinitionDTOList);
     }
 
-    public SimulationFinishDTO runSimulationStep2(List<EnvironmentInitDTO> environmentInitListDTO, List<EntityPopulationDTO> entityPopulationDTOList) {
+    public SimulationFinishDTO runSimulationStep2(List<EnvironmentInitDTO> environmentInitListDTO, List<EntityPopulationDTO> entityPopulationDTOList, ThreadPoolExecutor executorService) {
         for(EntityPopulationDTO entityPopulationDTO : entityPopulationDTOList){
             simulationDefinition.getEntitiesDef().get(entityPopulationDTO.getEntityName()).setPopulation(entityPopulationDTO.getCount());
         }
@@ -134,15 +115,6 @@ public class PredictionManager {
 
     public void simDone() {
         isDoneCounterChanger("simDone");
-    }
-    private synchronized Boolean setGetIsNewSimLoaded(String isNewSimLoaded) {
-        if(isNewSimLoaded.equals("true")) {
-            this.isNewSimLoaded = true;
-        }
-        else if(isNewSimLoaded.equals("false")) {
-            this.isNewSimLoaded = false;
-        }
-        return this.isNewSimLoaded;
     }
 
     private synchronized void isDoneCounterChanger(String action) {
@@ -406,16 +378,5 @@ public class PredictionManager {
         res = new ArrayList<>(entityInstanceManager.getPopulationHistory());
         res.add(simulationExecutionDetails.getEntityManager().get(entityCountReqDTO.getEntityName()).getPopulation());
         return new EntityCountResDTO(res, simulationExecutionDetails.getCurrTicks());
-    }
-    public QueueInfoDTO getQueueInfo() {
-
-        return new QueueInfoDTO(executorService.getActiveCount(), executorService.getQueue().size(), simDoneCounter);
-    }
-    public IsNewSimLoadDTO isNewSimLoad() {
-        IsNewSimLoadDTO res = new IsNewSimLoadDTO(setGetIsNewSimLoaded(""));
-        if(setGetIsNewSimLoaded("")) {
-            setGetIsNewSimLoaded("false");
-        }
-        return res;
     }
 }

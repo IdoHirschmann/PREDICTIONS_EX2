@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import manager.PredictionManager;
+import manager.LoadedFileManager;
 import managerFX.MainScreenController;
 import option2.EntityDefinitionDTO;
 import option2.PropertyDefinitionDTO;
@@ -47,7 +47,7 @@ public class SimulationResultController {
     private Label simulationDetails2;
     @FXML
     private Pane showPane;
-    private PredictionManager predictionManager;
+    private LoadedFileManager loadedFileManager;
     private Integer id;
     private MainScreenController mainScreenController;
 
@@ -62,13 +62,13 @@ public class SimulationResultController {
         this.mainScreenController = mainScreenController;
     }
 
-    public void setPredictionManager(PredictionManager predictionManager) {
-        this.predictionManager = predictionManager;
+    public void setPredictionManager(LoadedFileManager loadedFileManager) {
+        this.loadedFileManager = loadedFileManager;
         simulationDetails1.setText("Simulation ID: " + id);
-        PastSimulationInfoDTO pastSimulationInfoDTO = predictionManager.getPastSimulationInfo(new SimulationIDDTO(id));
+        PastSimulationInfoDTO pastSimulationInfoDTO = loadedFileManager.getPastSimulationInfo(new SimulationIDDTO(id));
         simulationDetails2.setText("Start time:    " + pastSimulationInfoDTO.getDate());
 
-        if(predictionManager.getSimulationState(new SimulationIDDTO(id)).getState().equals("FAILED")){
+        if(loadedFileManager.getSimulationState(new SimulationIDDTO(id)).getState().equals("FAILED")){
             loadFailScreen();
         }
     }
@@ -77,7 +77,7 @@ public class SimulationResultController {
         analyseChoice.setVisible(false);
         rerunButton.setDisable(true);
         rerunButton.setVisible(false);
-        FailedCauseDTO failedCause = predictionManager.getFailedCauseDTO(new SimulationIDDTO(id));
+        FailedCauseDTO failedCause = loadedFileManager.getFailedCauseDTO(new SimulationIDDTO(id));
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/results/simulationResult/failedCause/FailedCause.fxml"));
@@ -96,7 +96,7 @@ public class SimulationResultController {
 
     private void setEntityCBox() {
         ObservableList<String> entitiesName = FXCollections.observableArrayList();
-        for(EntityDefinitionDTO entityDefinitionDTO : predictionManager.showCurrentSimulationData().getEntityDefinitionDTOList()) {
+        for(EntityDefinitionDTO entityDefinitionDTO : loadedFileManager.showCurrentSimulationData().getEntityDefinitionDTOList()) {
             entitiesName.add(entityDefinitionDTO.getName());
         }
         entityChoice.setItems(entitiesName);
@@ -143,7 +143,7 @@ public class SimulationResultController {
                 loadEntityQuantityController();
             }
             else if (analyseChoice.getValue().equals("Property's statistical info")) {
-                setPropertyCBox(findEntityDefinitionDTO(entityChoice.getValue(), predictionManager.showCurrentSimulationData().getEntityDefinitionDTOList()).getProperties());
+                setPropertyCBox(findEntityDefinitionDTO(entityChoice.getValue(), loadedFileManager.showCurrentSimulationData().getEntityDefinitionDTOList()).getProperties());
                 propertyChoice.setVisible(true);
             }
         }
@@ -153,7 +153,7 @@ public class SimulationResultController {
         showPane.getChildren().clear();
         if(informationChoice.getValue() != null) {
             if (informationChoice.getValue().equals("Population histogram")) {
-                loadHistogramController(predictionManager.getHistogram(new HistogramSinglePropDTO(propertyChoice.getValue()), new SimulationDesiredInfoDTO(id, InfoType.HISTOGRAM), new HistogramSingleEntityDTO(entityChoice.getValue())));
+                loadHistogramController(loadedFileManager.getHistogram(new HistogramSinglePropDTO(propertyChoice.getValue()), new SimulationDesiredInfoDTO(id, InfoType.HISTOGRAM), new HistogramSingleEntityDTO(entityChoice.getValue())));
             }
             else if (informationChoice.getValue().equals("Consistency - Average steps the value did not change")) {
                 loadConsistencyController();
@@ -168,7 +168,7 @@ public class SimulationResultController {
         showPane.getChildren().clear();
         informationChoice.setValue(null);
         if(propertyChoice.getValue() != null){
-            setInformationCBox(findPropertyDefinitionDTO(propertyChoice.getValue(), findEntityDefinitionDTO(entityChoice.getValue(), predictionManager.showCurrentSimulationData().getEntityDefinitionDTOList()).getProperties()));
+            setInformationCBox(findPropertyDefinitionDTO(propertyChoice.getValue(), findEntityDefinitionDTO(entityChoice.getValue(), loadedFileManager.showCurrentSimulationData().getEntityDefinitionDTOList()).getProperties()));
             informationChoice.setVisible(true);
         }
     }
@@ -180,7 +180,7 @@ public class SimulationResultController {
             Parent EntityCounter = loader.load();
             EntityCounterController entityCounterController = loader.getController();
 
-            EntityCountResDTO entityCountResDTO = predictionManager.getEntityCounters(new EntityCountReqDTO(entityChoice.getValue(), id));
+            EntityCountResDTO entityCountResDTO = loadedFileManager.getEntityCounters(new EntityCountReqDTO(entityChoice.getValue(), id));
                 entityCounterController.addToChart(entityCountResDTO.getEntityCountSamples(), entityCountResDTO.getCurrTick());
 
             showPane.getChildren().add(EntityCounter);
@@ -193,7 +193,7 @@ public class SimulationResultController {
             Parent consistencyData = loader.load();
             ConsistencyController consistencyController = loader.getController();
             ConsistencyReqDTO consistencyReqDTO = new ConsistencyReqDTO(entityChoice.getValue(), propertyChoice.getValue(), id);
-            String consistencyAvg = predictionManager.getConsistency(consistencyReqDTO).getAvg().toString();
+            String consistencyAvg = loadedFileManager.getConsistency(consistencyReqDTO).getAvg().toString();
             consistencyController.setConsistencyAverage(consistencyAvg);
             showPane.getChildren().add(consistencyData);
         } catch (IOException e) {
@@ -205,7 +205,7 @@ public class SimulationResultController {
             Parent propAvgData = loader.load();
             PropAvgController propAvgController = loader.getController();
             ConsistencyReqDTO consistencyReqDTO = new ConsistencyReqDTO(entityChoice.getValue(), propertyChoice.getValue(), id);
-            String consistencyAvg = predictionManager.getPropAvg(consistencyReqDTO).getAvg().toString();
+            String consistencyAvg = loadedFileManager.getPropAvg(consistencyReqDTO).getAvg().toString();
             propAvgController.setPropAvg(consistencyAvg);
             showPane.getChildren().add(propAvgData);
         } catch (IOException e) {

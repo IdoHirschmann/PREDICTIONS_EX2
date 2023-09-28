@@ -7,15 +7,13 @@ import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import manager.PredictionManager;
+import manager.LoadedFileManager;
 import managerFX.MainScreenController;
 import option4.PastSimulationInfoDTO;
 import results.simulationDetails.SimulationDetailsController;
 import results.simulationResult.SimulationResultController;
 import results.simulations.SimulationsController;
 import results.simulations.listener.ShowButtonListener;
-import results.simulations.simulationID.SimulationIDController;
 
 import java.io.IOException;
 import java.util.List;
@@ -33,7 +31,7 @@ public class ResultsController implements ShowButtonListener {
     @FXML
     private SimulationsController simulationsListController;
     private MainScreenController mainScreenController;
-    private PredictionManager predictionManager;
+    private LoadedFileManager loadedFileManager;
     private SimulationDetailsController simulationDetailsController;
 
     @FXML
@@ -45,13 +43,13 @@ public class ResultsController implements ShowButtonListener {
         this.mainScreenController = mainScreenController;
     }
 
-    public void setPredictionManager(PredictionManager predictionManager) {
-        this.predictionManager = predictionManager;
-        this.simulationsListController.setPredictionManager(predictionManager);
+    public void setPredictionManager(LoadedFileManager loadedFileManager) {
+        this.loadedFileManager = loadedFileManager;
+        this.simulationsListController.setPredictionManager(loadedFileManager);
         simulationsListController.manageSimulationsState();
     }
     public void setSimulationsList() {
-        List<PastSimulationInfoDTO> pastSimulationInfoDTOList = predictionManager.createPastSimulationInfoDTOList();
+        List<PastSimulationInfoDTO> pastSimulationInfoDTOList = loadedFileManager.createPastSimulationInfoDTOList();
 
         for(PastSimulationInfoDTO pastSimulationInfoDTO : pastSimulationInfoDTOList) {
             simulationsListController.addSimulation(pastSimulationInfoDTO);
@@ -65,7 +63,7 @@ public class ResultsController implements ShowButtonListener {
             Parent simulationData = loader.load();
             SimulationDetailsController simulationDetailsController = loader.getController();
             simulationDetailsController.setId(id);
-            simulationDetailsController.setPredictionManager(predictionManager);
+            simulationDetailsController.setPredictionManager(loadedFileManager);
             simulationDetailsController.setResultsController(this);
             simulationDetailsController.setValues();
 
@@ -74,13 +72,13 @@ public class ResultsController implements ShowButtonListener {
                 simulationDetails.getChildren().clear();
             }
 
-            if(predictionManager.getSimulationState(new SimulationIDDTO(id)).getState().equals("STOPPED") ||
-                    predictionManager.getSimulationState(new SimulationIDDTO(id)).getState().equals("FAILED")) {
+            if(loadedFileManager.getSimulationState(new SimulationIDDTO(id)).getState().equals("STOPPED") ||
+                    loadedFileManager.getSimulationState(new SimulationIDDTO(id)).getState().equals("FAILED")) {
                 showResult(id);
                 simulationDetailsController.simulationStop();
             }
 
-            if(predictionManager.getSimulationState(new SimulationIDDTO(id)).getState().equals("PAUSED")) {
+            if(loadedFileManager.getSimulationState(new SimulationIDDTO(id)).getState().equals("PAUSED")) {
                 simulationDetailsController.simulationPause();
             }
 
@@ -106,7 +104,7 @@ public class ResultsController implements ShowButtonListener {
             simulationResultController.setMainScreenController(mainScreenController);
             simulationResult.getChildren().add(simulationData);
             simulationResultController.setId(id);
-            simulationResultController.setPredictionManager(predictionManager);
+            simulationResultController.setPredictionManager(loadedFileManager);
 
         } catch (IOException e) {
         }

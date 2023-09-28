@@ -1,6 +1,5 @@
 package results.simulationDetails;
 
-import com.sun.xml.internal.ws.api.FeatureConstructor;
 import ex2DTO.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -9,7 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import manager.PredictionManager;
+import manager.LoadedFileManager;
 import results.ResultsController;
 import results.simulationDetails.entityDetails.EntityDetailsController;
 import results.simulationDetails.terminationDetails.TerminationDetailsController;
@@ -35,7 +34,7 @@ public class SimulationDetailsController {
     @FXML
     private TerminationDetailsController terminationsDetailsController;
     private List<EntityDetailsController> entityDetailsControllers = new ArrayList<>();
-    private PredictionManager predictionManager;
+    private LoadedFileManager loadedFileManager;
     private ResultsController resultsController;
     private Integer id;
     private Thread thread;
@@ -45,10 +44,10 @@ public class SimulationDetailsController {
     public void initialize() {
         resumeButton.setDisable(true);
     }
-    public void setPredictionManager(PredictionManager predictionManager) {
-        this.predictionManager = predictionManager;
-        if(predictionManager.getSimulationState(new SimulationIDDTO(id)).getState().equals("STOPPED") ||
-                predictionManager.getSimulationState(new SimulationIDDTO(id)).getState().equals("FAILED")){
+    public void setPredictionManager(LoadedFileManager loadedFileManager) {
+        this.loadedFileManager = loadedFileManager;
+        if(loadedFileManager.getSimulationState(new SimulationIDDTO(id)).getState().equals("STOPPED") ||
+                loadedFileManager.getSimulationState(new SimulationIDDTO(id)).getState().equals("FAILED")){
             pauseButton.setDisable(true);
             stopButton.setDisable(true);
         }
@@ -56,7 +55,7 @@ public class SimulationDetailsController {
 
     public void setResultsController(ResultsController resultsController) {
         this.resultsController = resultsController;
-        if(predictionManager.getSimulationState(new SimulationIDDTO(id)).getState().equals("PAUSED")){
+        if(loadedFileManager.getSimulationState(new SimulationIDDTO(id)).getState().equals("PAUSED")){
             futureRunningButton.setDisable(false);
             resultsController.showResult(id);
         }
@@ -81,7 +80,7 @@ public class SimulationDetailsController {
             System.out.println(thread.getName());
             while (!stop && !simulationState.equals("STOPPED") && !simulationState.equals("FAILED")) {
                 try {
-                    SimulationDetailsDTO simulationDetailsDTO = predictionManager.simulationDetailsDTO(id);
+                    SimulationDetailsDTO simulationDetailsDTO = loadedFileManager.simulationDetailsDTO(id);
                     if(simulationDetailsDTO == null) {
                         break;
                     }
@@ -102,7 +101,7 @@ public class SimulationDetailsController {
 
                     if(stopSimulation) {
                         stop = true;
-                        predictionManager.stopSimulation(new StopDTO(id));
+                        loadedFileManager.stopSimulation(new StopDTO(id));
                     }
                     Thread.sleep(200);
 
@@ -125,7 +124,7 @@ public class SimulationDetailsController {
     }
 
     private void setEntities() {
-        List<EntityCountDTO> entityCountDTOList = predictionManager.getEntitiesCountDTO(id);
+        List<EntityCountDTO> entityCountDTOList = loadedFileManager.getEntitiesCountDTO(id);
 
         for(EntityCountDTO entityCountDTO : entityCountDTOList) {
             try {
@@ -150,14 +149,14 @@ public class SimulationDetailsController {
     }
     @FXML
     void OnPauseClicked(ActionEvent event){
-        predictionManager.pauseSimulation(new PauseAndResumeSimulationDTO(id));
+        loadedFileManager.pauseSimulation(new PauseAndResumeSimulationDTO(id));
         simulationPause();
         futureRunningButton.setDisable(false);
         resultsController.showResult(id);
     }
     @FXML
     void OnResumeClicked(ActionEvent event){
-        predictionManager.resumeSimulation(new PauseAndResumeSimulationDTO(id));
+        loadedFileManager.resumeSimulation(new PauseAndResumeSimulationDTO(id));
         pauseButton.setDisable(false);
         resumeButton.setDisable(true);
         futureRunningButton.setDisable(true);
@@ -174,7 +173,7 @@ public class SimulationDetailsController {
     }
     @FXML
     void futureRunningButtonClicked(ActionEvent event){
-        predictionManager.futureRunningSimulation(new PauseAndResumeSimulationDTO(id));
+        loadedFileManager.futureRunningSimulation(new PauseAndResumeSimulationDTO(id));
         resultsController.showResult(id);
     }
 

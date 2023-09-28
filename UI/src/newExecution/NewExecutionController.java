@@ -6,8 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
-import manager.PredictionManager;
+import manager.LoadedFileManager;
 import managerFX.MainScreenController;
 import newExecution.entitiesPopulation.EntityPopulationController;
 import newExecution.environmentInputs.EnvironmentInputsController;
@@ -48,7 +47,7 @@ public class NewExecutionController {
     private List<EntityPopulationDTO>entityPopulationDTOList = new ArrayList<>();
     private List<RerunButtonClickedListener> rerunButtonClickedEntitiesListeners= new ArrayList<>();
     private List<RerunButtonClickedListener> rerunButtonClickedEnvironmentsListeners = new ArrayList<>();
-    private PredictionManager predictionManager;
+    private LoadedFileManager loadedFileManager;
 
     @FXML
     public void initialize() {
@@ -61,8 +60,8 @@ public class NewExecutionController {
         entityPopulationController.setNewExecutionController(this);
     }
 
-    public void setPredictionManager(PredictionManager predictionManager) {
-        this.predictionManager = predictionManager;
+    public void setPredictionManager(LoadedFileManager loadedFileManager) {
+        this.loadedFileManager = loadedFileManager;
     }
 
     public void addRerunEntityListener(RerunButtonClickedListener rerunButtonClickedListener) {
@@ -116,8 +115,8 @@ public class NewExecutionController {
         }
 
         entityPopulationController.initialize();
-        setEntitiesData(predictionManager.showCurrentSimulationData().getEntityDefinitionDTOList(),
-                predictionManager.showCurrentSimulationData().getGridCols() * predictionManager.showCurrentSimulationData().getGridRows());
+        setEntitiesData(loadedFileManager.showCurrentSimulationData().getEntityDefinitionDTOList(),
+                loadedFileManager.showCurrentSimulationData().getGridCols() * loadedFileManager.showCurrentSimulationData().getGridRows());
     }
 
     @FXML
@@ -127,13 +126,13 @@ public class NewExecutionController {
             listener.startOnClicked();
         }
 
-        predictionManager.runSimulationStep2(environmentInitDTOList, entityPopulationDTOList);
+        loadedFileManager.runSimulationStep2(environmentInitDTOList, entityPopulationDTOList, null);
         mainScreenController.resultsScreen();
     }
 
     public void onRerun(Integer id) {
-        List<EnvironmentInitDTO> environmentInitDTOListForRerun = predictionManager.getEnvironmentRerun(new SimulationIDDTO(id));
-        List<EntityPopulationDTO> entityPopulationDTOListForRerun = predictionManager.getEntityRerun(new SimulationIDDTO(id));
+        List<EnvironmentInitDTO> environmentInitDTOListForRerun = loadedFileManager.getEnvironmentRerun(new SimulationIDDTO(id));
+        List<EntityPopulationDTO> entityPopulationDTOListForRerun = loadedFileManager.getEntityRerun(new SimulationIDDTO(id));
         int i = 0;
 
         for (EnvironmentInitDTO environmentInitDTO : environmentInitDTOListForRerun) {

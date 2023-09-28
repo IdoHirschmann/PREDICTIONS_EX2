@@ -6,16 +6,14 @@ import header.PredictionHeaderController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import manager.PredictionManager;
+import manager.LoadedFileManager;
 import managerFX.animation.ColorChangeAnimation;
 import managerFX.animation.FadeAndSpinAnimation;
 import newExecution.NewExecutionController;
@@ -26,7 +24,7 @@ import results.simulationDetails.SimulationDetailsController;
 import java.io.IOException;
 
 public class MainScreenController {
-    private PredictionManager predictionManager = new PredictionManager();
+    private LoadedFileManager loadedFileManager = new LoadedFileManager(null);
     @FXML
     private GridPane header;
     @FXML
@@ -53,7 +51,7 @@ public class MainScreenController {
     @FXML
     public void initialize() {
         headerController.setMainScreenController(this);
-        headerController.setPredictionManager(predictionManager);
+        headerController.setPredictionManager(loadedFileManager);
 
         StackPane stackPane = new StackPane(mainBorderPane);
         rootStackPane = stackPane;
@@ -86,25 +84,26 @@ public class MainScreenController {
 
     private void simulationLoadManager() {
         Pane emptyPane = new Pane();
-        thread = new Thread(() -> {
-            while (true) {
-                try {
-                    IsNewSimLoadDTO isNewSimLoadDTO = predictionManager.isNewSimLoad();
-                    if (isNewSimLoadDTO.getNewSimLoad()) {
-                        Platform.runLater(() -> {
-                            mainBorderPane.setCenter(emptyPane);
-                            isDetailsPresent = false;
-                            isResultsPresent = false;
-                            isNewExecutionPresent = false;
-                        });
-                    }
-                    Thread.sleep(200);
-                } catch (InterruptedException ignore) {
-                }
-            }
-        });
-
-        thread.start();
+//        thread = new Thread(() -> {
+//            while (true) {
+//                try {
+//                    IsNewSimLoadDTO isNewSimLoadDTO = loadedFileManager.isNewSimLoad();
+//                    if (isNewSimLoadDTO.getNewSimLoad()) {
+//                        Platform.runLater(() -> {
+//                            mainBorderPane.setCenter(emptyPane);
+//                            isDetailsPresent = false;
+//                            isResultsPresent = false;
+//                            isNewExecutionPresent = false;
+//                        });
+//                    }
+//                    Thread.sleep(200);
+//                } catch (InterruptedException ignore) {
+//                }
+//            }
+//        });
+//
+//        thread.start();
+        //todo - is really not for ex 3? ^
     }
 
     public void setSimulationDetailsController(SimulationDetailsController simulationDetailsController) {
@@ -112,7 +111,7 @@ public class MainScreenController {
     }
 
     public void loadDetailsScreen() {
-        SimulationDefinitionDTO simulationDefinitionDTO = predictionManager.showCurrentSimulationData();
+        SimulationDefinitionDTO simulationDefinitionDTO = loadedFileManager.showCurrentSimulationData();
         try {
             if (!isDetailsPresent) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/details/detailsScreen.fxml"));
@@ -141,14 +140,14 @@ public class MainScreenController {
                 Parent newExecutionContent = loader.load();
                 newExecutionController = loader.getController();
 
-                newExecutionController.setEntitiesData(predictionManager.showCurrentSimulationData().getEntityDefinitionDTOList(),
-                        predictionManager.showCurrentSimulationData().getGridCols() * predictionManager.showCurrentSimulationData().getGridRows());
-                newExecutionController.setPredictionManager(predictionManager);
+                newExecutionController.setEntitiesData(loadedFileManager.showCurrentSimulationData().getEntityDefinitionDTOList(),
+                        loadedFileManager.showCurrentSimulationData().getGridCols() * loadedFileManager.showCurrentSimulationData().getGridRows());
+                newExecutionController.setPredictionManager(loadedFileManager);
                 newExecutionController.setMainScreenController(this);
 
                 mainBorderPane.setCenter(newExecutionContent);
 
-                EnvironmentDefinitionListDTO environmentDefinitionListDTO = predictionManager.runSimulationStep1();
+                EnvironmentDefinitionListDTO environmentDefinitionListDTO = loadedFileManager.runSimulationStep1();
                 newExecutionController.setEnvironmentData(environmentDefinitionListDTO);
                 newExecutionController.setOnColorChange(color);
                 if (simulationDetailsController != null) {
@@ -171,7 +170,7 @@ public class MainScreenController {
 
                 mainBorderPane.setCenter(resultsData);
                 resultsController.setMainScreenController(this);
-                resultsController.setPredictionManager(predictionManager);
+                resultsController.setPredictionManager(loadedFileManager);
                 resultsController.setSimulationsList();
                 resultsController.setOnColorChange(color);
                 isResultsPresent = true;

@@ -7,10 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
-import manager.PredictionManager;
+import manager.LoadedFileManager;
 import option4.PastSimulationInfoDTO;
 import results.ResultsController;
-import results.simulationDetails.entityDetails.EntityDetailsController;
 import results.simulations.simulationID.ListAction;
 import results.simulations.simulationID.SimulationIDController;
 
@@ -24,7 +23,7 @@ public class SimulationsController {
     @FXML
     private VBox simulationHbox;
     private ResultsController resultsController;
-    private PredictionManager predictionManager;
+    private LoadedFileManager loadedFileManager;
     private Thread thread;
 
     private List<SimulationIDController> simulationIDControllerList = new ArrayList<>();
@@ -33,8 +32,8 @@ public class SimulationsController {
         this.resultsController = resultsController;
     }
 
-    public void setPredictionManager(PredictionManager predictionManager) {
-        this.predictionManager = predictionManager;
+    public void setPredictionManager(LoadedFileManager loadedFileManager) {
+        this.loadedFileManager = loadedFileManager;
     }
 
     public void manageSimulationsState() {
@@ -46,7 +45,7 @@ public class SimulationsController {
                         while (simulationIDControllerStopped != null) {
                             Collections.shuffle(simulationIDControllerList);
                             SimulationIDController finalSimulationIDControllerStopped = simulationIDControllerStopped;
-                            StopCauseResDTO stopCauseResDTO = predictionManager.stopCause(new StopCauseReqDTO(finalSimulationIDControllerStopped.getID()));
+                            StopCauseResDTO stopCauseResDTO = loadedFileManager.stopCause(new StopCauseReqDTO(finalSimulationIDControllerStopped.getID()));
                             if (stopCauseResDTO == null) {
                                 break;
                             }
@@ -103,7 +102,7 @@ public class SimulationsController {
             default:
                 for (SimulationIDController simulationIDController1 : simulationIDControllerList) {
                     Integer searchID = simulationIDController1.getID();
-                    if (predictionManager.simulationDetailsDTO(searchID).getSimulationState().equals("STOPPED") || predictionManager.simulationDetailsDTO(searchID).getSimulationState().equals("FAILED")) {
+                    if (loadedFileManager.simulationDetailsDTO(searchID).getSimulationState().equals("STOPPED") || loadedFileManager.simulationDetailsDTO(searchID).getSimulationState().equals("FAILED")) {
                         simulationIDControllerList.remove(simulationIDController1);
                         return simulationIDController1;
                     }

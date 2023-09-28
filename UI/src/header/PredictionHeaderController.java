@@ -11,10 +11,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import manager.PredictionManager;
+import manager.LoadedFileManager;
 import managerFX.MainScreenController;
 import managerFX.animation.ColorChangeAnimation;
 import managerFX.animation.FadeAndSpinAnimation;
@@ -54,7 +53,7 @@ public class PredictionHeaderController {
 
     private Parent root;
 
-    private PredictionManager predictionManager;
+    private LoadedFileManager loadedFileManager;
     private BooleanProperty buttonsDisabled = new SimpleBooleanProperty(true);
 
     public void initialize() {
@@ -75,8 +74,8 @@ public class PredictionHeaderController {
         return queueInfoController;
     }
 
-    public void setPredictionManager(PredictionManager predictionManager) {
-        this.predictionManager = predictionManager;
+    public void setPredictionManager(LoadedFileManager loadedFileManager) {
+        this.loadedFileManager = loadedFileManager;
     }
 
     public void setRoot(Parent root) {
@@ -106,9 +105,9 @@ public class PredictionHeaderController {
         XmlFullPathDTO xmlFullPathDTO = new XmlFullPathDTO(selectedFile.getAbsolutePath());
         try {
             failedLoadCause.setVisible(false);
-            predictionManager.loadXmlData(xmlFullPathDTO);
+            //loadedFileManager.loadXmlData(xmlFullPathDTO);
             currentFileLabel.setText(selectedFile.getAbsolutePath());
-            queueInfoController.setPredictionManager(predictionManager);
+            queueInfoController.setPredictionManager(loadedFileManager);
             setButtonsDisabled(false);
         }catch (Exception exception) {
             newExecutionButton.setVisible(false);
