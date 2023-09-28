@@ -20,14 +20,9 @@ public class XmlLoader {
     private String filePath;
     private PRDWorld prdWorld;
 
-    public SimulationDefinition loadXmlData(String filePath) throws IOException, JAXBException {
-        setFilePath(filePath);
+    public SimulationDefinition loadXmlData(InputStream inputStream) throws IOException, JAXBException {
+        //setFilePath(stream);
 
-        InputStream inputStream = null;
-        try{
-            inputStream = Files.newInputStream(new File(this.filePath).toPath());   
-        }
-        catch (Exception exception) {}
         this.prdWorld = deserializeFrom(inputStream);
 
         return createSimulationDefinition(this.prdWorld);

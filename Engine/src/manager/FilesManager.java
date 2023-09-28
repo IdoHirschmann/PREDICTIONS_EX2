@@ -9,6 +9,7 @@ import simulation.definition.SimulationDefinition;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,18 +21,16 @@ public class FilesManager {
     private ThreadPoolExecutor executorService;
     private Integer numOfThreads;
     private Integer currIdNum = 1;
-    private XmlLoader xmlLoader;
+    private XmlLoader xmlLoader = new XmlLoader();
 
     public SimulationFinishDTO runSimulationStep2(List<EnvironmentInitDTO> environmentInitListDTO, List<EntityPopulationDTO> entityPopulationDTOList, Integer id){
         return loadedFileManagerMap.get(id).runSimulationStep2(environmentInitListDTO,entityPopulationDTOList, executorService);
     }
 
-    public void loadXmlData(XmlFullPathDTO xmlFullPathDTO) throws JAXBException, IOException {
-        SimulationDefinition newSimulationDefinition = xmlLoader.loadXmlData(xmlFullPathDTO.getFullPathXML());
+    public void loadXmlData(InputStream xmlInputStreamDTO) throws JAXBException, IOException {
+        SimulationDefinition newSimulationDefinition = xmlLoader.loadXmlData(xmlInputStreamDTO);
 
-        SimulationDefinition simulationDefinition = newSimulationDefinition;
-        executorService = (ThreadPoolExecutor) Executors.newFixedThreadPool(numOfThreads);
-        loadedFileManagerMap.put(currIdNum, new LoadedFileManager(simulationDefinition));
+        loadedFileManagerMap.put(currIdNum, new LoadedFileManager(newSimulationDefinition));
         currIdNum++;
     }
 
