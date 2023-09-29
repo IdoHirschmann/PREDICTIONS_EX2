@@ -24,6 +24,5 @@ public class LoadXmlServlet extends HttpServlet {
         } catch (Exception e) {
             resp.sendError(400, "Error processing the request: " + e.getMessage());
         }
-
     }
 }

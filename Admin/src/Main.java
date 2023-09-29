@@ -1,22 +1,24 @@
-import okhttp3.Call;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import mainPage.MainPageController;
 
-public class Main {
+public class Main extends Application {
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("Predictions");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/mainPage/MainPage.fxml"));
+        Parent root = loader.load();
+        MainPageController mainPageController = loader.getController();
+        Scene scene = new Scene(root, 1350, 750);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
     public static void main(String[] args) {
-        OkHttpClient okHttpClient = new OkHttpClient();
-
-        String urlBase = "http://localhost:8080/Predictions/hello";
-        Request request = new Request.Builder().url(urlBase).build();
-        Call call  = okHttpClient.newCall(request);
-
-        try {
-            final Response response = call.execute();
-            System.out.println(response.body().string());
-        }
-        catch(Exception exception){
-
-        }
+        launch(args);
     }
 }

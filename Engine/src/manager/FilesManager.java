@@ -17,11 +17,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class FilesManager {
+    //todo - every file has in the xml the name of the file that is uniq, so the key will be the name! need to change
     private Map<Integer, LoadedFileManager> loadedFileManagerMap = new HashMap<>();
-    private ThreadPoolExecutor executorService;
-    private Integer numOfThreads;
+    private ThreadPoolExecutor executorService = (ThreadPoolExecutor) Executors.newFixedThreadPool(1);
+    private Integer numOfThreads = 1;
     private Integer currIdNum = 1;
     private XmlLoader xmlLoader = new XmlLoader();
+
+
 
     public SimulationFinishDTO runSimulationStep2(List<EnvironmentInitDTO> environmentInitListDTO, List<EntityPopulationDTO> entityPopulationDTOList, Integer id){
         return loadedFileManagerMap.get(id).runSimulationStep2(environmentInitListDTO,entityPopulationDTOList, executorService);

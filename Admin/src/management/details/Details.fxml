@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+<HBox maxHeight="490.0" maxWidth="990.0" minHeight="490.0" minWidth="990.0" prefHeight="490.0" prefWidth="990.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="management.details.DetailsController">
+   <children>
+      <Pane maxHeight="490.0" maxWidth="300.0" minHeight="490.0" minWidth="300.0" prefHeight="490.0" prefWidth="300.0">
+         <children>
+            <fx:include fx:id="simulationBreakdown" source="simulationBreakdown/SimulationBreakdown.fxml" />
+         </children></Pane>
+      <Pane fx:id="selectedComponentPane" maxWidth="690.0" minWidth="690.0" prefHeight="200.0" prefWidth="690.0" />
+   </children>
+</HBox>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="CENTER" maxHeight="90.0" maxWidth="1300.0" minHeight="90.0" minWidth="1300.0" prefHeight="90.0" prefWidth="1300.0" stylesheets="@HeaderStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="header.HeaderController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="25.0" minWidth="25.0" prefWidth="25.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="25.0" minWidth="25.0" prefWidth="25.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" />
+      <ColumnConstraints maxWidth="30.0" minWidth="0.0" prefWidth="0.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <Label id="headLineLable" fx:id="headLineLable" alignment="CENTER" prefHeight="40.0" prefWidth="380.0" text="Prediction - Administrator" GridPane.columnIndex="1" GridPane.columnSpan="5" />
+      <Button alignment="CENTER" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#managementButtonClicked" prefHeight="30.0" prefWidth="200.0" styleClass="HeaderMenuButtons" text="Management" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Button>
+      <Button maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#allocationButtonClicked" prefHeight="30.0" prefWidth="200.0" styleClass="HeaderMenuButtons" text="Allocations" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+      <Button minWidth="200.0" mnemonicParsing="false" onAction="#executionsHistoryButtonClicked" prefHeight="30.0" prefWidth="200.0" styleClass="HeaderMenuButtons" text="Executions History" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+   </children>
+</GridPane>

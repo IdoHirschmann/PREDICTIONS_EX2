@@ -1,0 +1,21 @@
+
+/* Apply styles to the Label with ID "currentFileLabel" */
+#loadedFileLabel {
+    -fx-background-color: #D9DEEC;
+    -fx-border-color: #575757;
+    -fx-font-size: 17px;
+    -fx-text-fill: black;
+    -fx-border-radius: 4px;
+}
+
+/* Apply styles to the Button with ID "loadFileButton" */
+.managementButtons {
+    -fx-background-color: #5CA93B;
+    -fx-text-fill: white;
+}
+.managementButtons:hover {
+    -fx-background-color: #158A19;
+}
+#fileFailCauseLabel {
+    -fx-text-fill: red;
+}
