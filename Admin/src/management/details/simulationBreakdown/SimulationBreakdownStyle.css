@@ -1,0 +1,20 @@
+.simulationBreakdownChoiceBoxes{
+    -fx-font-size: 14px;
+    -fx-pref-width: 150px;
+}
+
+/* Styling for buttons */
+.showButtons {
+    -fx-font-size: 14px;
+    -fx-pref-width: 80px;
+    -fx-background-color: #4CAF50; /* Green background color */
+    -fx-text-fill: white; /* White text color */
+}
+.showButtons:hover {
+    -fx-background-color: #158A19;
+}
+
+.simulationBreakdownLabels {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}

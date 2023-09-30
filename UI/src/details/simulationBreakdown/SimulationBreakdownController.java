@@ -72,7 +72,6 @@ public class SimulationBreakdownController {
                     .findFirst();
                     detailsScreenController.rulesShowButtonClicked(rulesDTO.get());
         }
-
     }
     @FXML
     private void EnvironmentButtonClicked(ActionEvent event) {

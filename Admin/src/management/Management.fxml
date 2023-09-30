@@ -52,7 +52,10 @@
                <children>
                   <fx:include fx:id="detailsHBox" source="details/Details.fxml" />
                </children></Pane>
-            <Pane maxHeight="490.0" maxWidth="300.0" minHeight="490.0" minWidth="300.0" prefHeight="490.0" prefWidth="300.0" />
+            <Pane maxHeight="490.0" maxWidth="300.0" minHeight="490.0" minWidth="300.0" prefHeight="490.0" prefWidth="300.0">
+               <children>
+                  <fx:include fx:id="threadPoolManagement" source="threadPoolManagement/ThreadPoolManagement.fxml" />
+               </children></Pane>
          </children>
       </HBox>
    </children>

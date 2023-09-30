@@ -5,6 +5,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.VBox;
+import management.details.DetailsController;
+import option2.EntityDefinitionDTO;
+import option2.PropertyDefinitionDTO;
+import option2.RulesDTO;
+import option2.SimulationDefinitionDTO;
+
+import java.util.List;
+import java.util.Optional;
 
 public class SimulationBreakdownController {
     @FXML
@@ -31,31 +39,72 @@ public class SimulationBreakdownController {
     private Button showSimulation;
     @FXML
     private VBox simulationBreakdownVBox;
+    private DetailsController detailsScreenController;
+    private SimulationDefinitionDTO simulationDefinitionDTO;
+
+
+    public void setDetailsScreenController(DetailsController detailsScreenController) {
+        this.detailsScreenController = detailsScreenController;
+    }
+
     @FXML
-    void EntitiesButtonClicked(ActionEvent event) {
-        String entityName = choiceBoxEntites.getSelectionModel().getSelectedItem();
-        if(entityName != null) {
-            //todo
+    private void EntitiesButtonClicked(ActionEvent event) {
+        String newValue = choiceBoxEntites.getSelectionModel().getSelectedItem();
+        if (newValue != null) {
+            Optional<EntityDefinitionDTO> entityDefinitionDTO = simulationDefinitionDTO.getEntityDefinitionDTOList().stream()
+                    .filter(myObject -> myObject.getName().equals(newValue))
+                    .findFirst();
+            detailsScreenController.entitiesShowButtonClicked(entityDefinitionDTO.get());
         }
     }
     @FXML
-    void EnvironmentButtonClicked(ActionEvent event) {
-        String environmentName = choiceBoxEnvironment.getSelectionModel().getSelectedItem();
-        if(environmentName != null) {
-            //todo
+    private void RulesButtonClicked(ActionEvent event) {
+        String newValue = choiceBoxRules.getSelectionModel().getSelectedItem();
+        if(newValue != null) {
+            Optional<RulesDTO> rulesDTO = simulationDefinitionDTO.getRulesDTOList().stream()
+                    .filter(myObject -> myObject.getName().equals(newValue))
+                    .findFirst();
+            detailsScreenController.rulesShowButtonClicked(rulesDTO.get());
         }
     }
     @FXML
-    void GridButtonClicked(ActionEvent event) {
-        //todo
-    }
-    @FXML
-    void RulesButtonClicked(ActionEvent event) {
-        String ruleName = choiceBoxRules.getSelectionModel().getSelectedItem();
-        if(ruleName != null) {
-            //todo
+    private void EnvironmentButtonClicked(ActionEvent event) {
+        String newValue = choiceBoxEnvironment.getSelectionModel().getSelectedItem();
+        if (newValue != null) {
+            Optional<PropertyDefinitionDTO> environmentDefinitionDTO = simulationDefinitionDTO.getEnvironmentDefenitionDTOList().stream()
+                    .filter(myObject -> myObject.getName().equals(newValue))
+                    .findFirst();
+            detailsScreenController.environmentShowButtonClicked(environmentDefinitionDTO.get());
         }
     }
+
+    @FXML
+    private void GridButtonClicked(ActionEvent event) {
+        detailsScreenController.gridShowButtonClicked(simulationDefinitionDTO.getGridRows(), simulationDefinitionDTO.getGridCols());
+    }
+
+    public void initializeDetailsData(SimulationDefinitionDTO simulationDefinitionDTO) {
+        this.simulationDefinitionDTO = simulationDefinitionDTO;
+        initializeEntities(simulationDefinitionDTO.getEntityDefinitionDTOList());
+        initializeRules(simulationDefinitionDTO.getRulesDTOList());
+        initializeEnvironments(simulationDefinitionDTO.getEnvironmentDefenitionDTOList());
+    }
+    private void initializeRules(List<RulesDTO> rulesDTOList) {
+        for(RulesDTO rulesDTO : rulesDTOList) {
+            choiceBoxRules.getItems().add(rulesDTO.getName());
+        }
+    }
+    private void initializeEntities(List<EntityDefinitionDTO> entityDefinitionDTOList) {
+        for(EntityDefinitionDTO entityDefinitionDTO : entityDefinitionDTOList) {
+            choiceBoxEntites.getItems().add(entityDefinitionDTO.getName());
+        }
+    }
+    private void initializeEnvironments(List<PropertyDefinitionDTO> environmentDefenitionDTOList) {
+        for(PropertyDefinitionDTO environmentDefinitionDTO : environmentDefenitionDTOList) {
+            choiceBoxEnvironment.getItems().add(environmentDefinitionDTO.getName());
+        }
+    }
+
     @FXML
     void chooseSimulationButtonClicked(ActionEvent event) {
         //todo

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="490.0" maxWidth="300.0" minHeight="490.0" minWidth="300.0" prefHeight="490.0" prefWidth="300.0" stylesheets="@ThreadPoolManagementStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="management.threadPoolManagement.ThreadPoolManagementController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label prefHeight="17.0" prefWidth="180.0" styleClass="queueInfoLabels" text="Threds New Count" />
+            <Spinner fx:id="thredsCountSpinner" prefHeight="25.0" prefWidth="72.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="simInQueueCounter" prefWidth="180.0" styleClass="queueInfoLabels" text="Sim in queue counter: " />
+            <Label fx:id="simInQueue" styleClass="queueInfoLabels" text="0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="simRunningCounter" prefWidth="180.0" styleClass="queueInfoLabels" text="Sim running counter: " />
+            <Label fx:id="simRunning" styleClass="queueInfoLabels" text="0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="simDoneCounter" prefWidth="180.0" styleClass="queueInfoLabels" text="Sim done counter: " />
+            <Label fx:id="simDone" styleClass="queueInfoLabels" text="0" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets left="10.0" right="10.0" />
+   </padding>
+</VBox>
