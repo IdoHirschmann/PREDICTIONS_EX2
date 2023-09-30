@@ -1,6 +1,7 @@
 package manager;
 
 import ex2DTO.QueueInfoDTO;
+import ex3DTO.SimulationNameDTO;
 import option1.XmlFullPathDTO;
 import option3.EntityPopulationDTO;
 import option3.EnvironmentInitDTO;
@@ -10,6 +11,7 @@ import simulation.definition.SimulationDefinition;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +37,16 @@ public class FilesManager {
 
         loadedFileManagerMap.put(currIdNum, new LoadedFileManager(newSimulationDefinition));
         currIdNum++;
+    }
+
+    public List<SimulationNameDTO> getSimulationNameDtoList(){
+        List<SimulationNameDTO> res = new ArrayList<>();
+
+        loadedFileManagerMap.forEach((key, value) -> {
+            res.add(new SimulationNameDTO(key));
+        });
+
+        return res;
     }
 
     //todo

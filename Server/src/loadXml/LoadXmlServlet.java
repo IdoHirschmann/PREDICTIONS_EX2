@@ -22,7 +22,17 @@ public class LoadXmlServlet extends HttpServlet {
         try {
             manager.loadXmlData(xmlPart.getInputStream());
         } catch (Exception e) {
-            resp.sendError(400, "Error processing the request: " + e.getMessage());
+            //resp.sendError(400, "Error processing the request: " + e.getMessage());
+            String errorMessage = "Error processing the request: " + e.getMessage();
+
+            // Set the response status code to 400 (Bad Request)
+            resp.setStatus(400);
+
+            // Set the response content type to plain text
+            resp.setContentType("text/plain");
+
+            // Send the error message as the response body
+            resp.getWriter().write(errorMessage);
         }
     }
 }

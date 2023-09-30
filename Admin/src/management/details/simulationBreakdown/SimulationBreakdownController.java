@@ -1,5 +1,6 @@
 package management.details.simulationBreakdown;
 
+import ex3DTO.SimulationNameDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -83,11 +84,12 @@ public class SimulationBreakdownController {
         detailsScreenController.gridShowButtonClicked(simulationDefinitionDTO.getGridRows(), simulationDefinitionDTO.getGridCols());
     }
 
-    public void initializeDetailsData(SimulationDefinitionDTO simulationDefinitionDTO) {
-        this.simulationDefinitionDTO = simulationDefinitionDTO;
-        initializeEntities(simulationDefinitionDTO.getEntityDefinitionDTOList());
-        initializeRules(simulationDefinitionDTO.getRulesDTOList());
-        initializeEnvironments(simulationDefinitionDTO.getEnvironmentDefenitionDTOList());
+    public void initializeDetailsData(List<SimulationNameDTO> simulationNameDTOS) {
+        choiceBoxSimulations.getItems().clear();
+
+        for(SimulationNameDTO simulationNameDTO: simulationNameDTOS){
+            choiceBoxSimulations.getItems().add(simulationNameDTO.getName().toString());//todo
+        }
     }
     private void initializeRules(List<RulesDTO> rulesDTOList) {
         for(RulesDTO rulesDTO : rulesDTOList) {

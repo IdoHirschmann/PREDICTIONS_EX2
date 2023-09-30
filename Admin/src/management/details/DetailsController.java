@@ -1,5 +1,6 @@
 package management.details;
 
+import ex3DTO.SimulationNameDTO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +14,7 @@ import management.details.simulationBreakdown.SimulationBreakdownController;
 import option2.*;
 
 import java.io.IOException;
+import java.util.List;
 
 public class DetailsController {
 
@@ -81,7 +83,7 @@ public class DetailsController {
     }
 
 
-    public void initializeDetailsData(SimulationDefinitionDTO simulationDefinitionDTO) {
-        simulationBreakdownController.initializeDetailsData(simulationDefinitionDTO);
+    public void initializeDetailsData(List<SimulationNameDTO> simulationNameDTOS) {
+        simulationBreakdownController.initializeDetailsData(simulationNameDTOS);
     }
 }
