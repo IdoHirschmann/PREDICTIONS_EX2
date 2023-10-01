@@ -1,11 +1,10 @@
 package option2.ActionDTO;
 
-public class ReplaceDTO  extends ActionDTO{
+public class ReplaceDTO {
 
     private String mode;
 
-    public ReplaceDTO(String name, String mainEntityName, String secondaryEntityName, String mode) {
-        super(name, mainEntityName, secondaryEntityName);
+    public ReplaceDTO(String mode) {
 
         this.mode = mode;
     }

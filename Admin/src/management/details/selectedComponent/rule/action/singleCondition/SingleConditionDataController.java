@@ -2,6 +2,7 @@ package management.details.selectedComponent.rule.action.singleCondition;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import option2.ActionDTO.ActionDTO;
 import option2.ActionDTO.SingleConditionDTO;
 
 
@@ -22,24 +23,24 @@ public class SingleConditionDataController {
     @FXML
     private Label thisCount;
 
-    public void SetData(SingleConditionDTO singleConditionDTO) {
-        if(singleConditionDTO.getElseActionAmount() == null) {
+    public void SetData(ActionDTO singleConditionDTO) {
+        if(singleConditionDTO.getSingleConditionDTO().getElseActionAmount() == null) {
             elseCount.setText(" --- ");
         }
         else {
-            elseCount.setText(Integer.toString(singleConditionDTO.getElseActionAmount()));
+            elseCount.setText(Integer.toString(singleConditionDTO.getSingleConditionDTO().getElseActionAmount()));
         }
-        operator.setText(singleConditionDTO.getOperator());
+        operator.setText(singleConditionDTO.getSingleConditionDTO().getOperator());
         mainEntityName.setText(singleConditionDTO.getMainEntityName());
 
-        if(singleConditionDTO.getThisActionAmount() == null) {
+        if(singleConditionDTO.getSingleConditionDTO().getThisActionAmount() == null) {
             thisCount.setText(" --- ");
         }
         else {
-            thisCount.setText(Integer.toString(singleConditionDTO.getThisActionAmount()));
+            thisCount.setText(Integer.toString(singleConditionDTO.getMultipleConditionDTO().getThisActionAmount()));
         }
-        property.setText(singleConditionDTO.getProperty());
-        value.setText(singleConditionDTO.getValue());
+        property.setText(singleConditionDTO.getSingleConditionDTO().getProperty());
+        value.setText(singleConditionDTO.getSingleConditionDTO().getValue());
 
         if(singleConditionDTO.getSecondaryEntityName() == null) {
             secondEntityName.setText("None");

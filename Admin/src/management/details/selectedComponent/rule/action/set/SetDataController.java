@@ -2,6 +2,7 @@ package management.details.selectedComponent.rule.action.set;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import option2.ActionDTO.ActionDTO;
 import option2.ActionDTO.SetDTO;
 
 public class SetDataController {
@@ -16,10 +17,10 @@ public class SetDataController {
     private Label value;
 
 
-    public void SetData(SetDTO setDTO) {
+    public void SetData(ActionDTO setDTO) {
         mainEntityName.setText(setDTO.getMainEntityName());
-        property.setText(setDTO.getProperty());
-        value.setText(setDTO.getValue());
+        property.setText(setDTO.getSetDTO().getProperty());
+        value.setText(setDTO.getSetDTO().getValue());
 
         if(setDTO.getSecondaryEntityName() == null) {
             secondEntityName.setText("None");

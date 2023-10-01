@@ -1,11 +1,10 @@
 package option2.ActionDTO;
 
-public class SetDTO extends ActionDTO {
+public class SetDTO {
      private String value;
      private String property;
 
-    public SetDTO(String name, String mainEntityName, String secondaryEntityName, String value, String property) {
-        super(name, mainEntityName, secondaryEntityName);
+    public SetDTO(String value, String property) {
         this.value = value;
         this.property = property;
     }

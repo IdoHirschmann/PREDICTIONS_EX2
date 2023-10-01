@@ -17,11 +17,16 @@ public class Replace extends AbstractAction {
 
     @Override
     public ActionDTO createDTO() {
+        ReplaceDTO replaceDTO = new ReplaceDTO(mode);
         if(getSecondaryEntity() == null) {
-            return new ReplaceDTO("Replace", getPrimaryEntityDefinition().getName(), null, mode);
+            return new ActionDTO("Replace", getPrimaryEntityDefinition().getName(), null,
+                    null,null,null,null,null,null,replaceDTO,null,null
+            );
 
         }
-        return new ReplaceDTO("Replace", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName(), mode);
+        return new ActionDTO("Replace", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName(),
+                null,null,null,null,null,null,replaceDTO,null,null
+        );
     }
 
     public String getMode() {

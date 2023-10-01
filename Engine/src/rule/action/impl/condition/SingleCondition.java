@@ -35,12 +35,15 @@ public class SingleCondition extends AbstractCondition {
 
     @Override
     public ActionDTO createDTO() {
+        SingleConditionDTO singleConditionDTO = new SingleConditionDTO( property.GetSimpleValue(), value.GetSimpleValue(), operator.toString(), thenAmount(), elseAmount());
         if(getSecondaryEntity() == null) {
-            return new SingleConditionDTO("Single Condition", getPrimaryEntityDefinition().getName(), null,
-                    property.GetSimpleValue(), value.GetSimpleValue(), operator.toString(), thenAmount(), elseAmount());
+            return new ActionDTO("Single Condition", getPrimaryEntityDefinition().getName(), null,
+                    null,null,null,null,null,null,null,null,singleConditionDTO
+            );
         }
-        return new SingleConditionDTO("Single Condition", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName(),
-                property.GetSimpleValue(), value.GetSimpleValue(), operator.toString(), thenAmount(), elseAmount());
+        return new ActionDTO("Single Condition", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName(),
+                null,null,null,null,null,null,null,null,singleConditionDTO
+        );
     }
 
     @Override

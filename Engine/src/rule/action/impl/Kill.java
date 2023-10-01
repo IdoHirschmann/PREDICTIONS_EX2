@@ -15,10 +15,11 @@ public class Kill extends AbstractAction {
 
     @Override
     public ActionDTO createDTO() {
+
         if(getSecondaryEntity() == null) {
-            return new KillDTO("Kill", getPrimaryEntityDefinition().getName(), null);
+            return new ActionDTO("Kill", getPrimaryEntityDefinition().getName(), null , null,null,null,null,null,null,null,null,null);
         }
-        return new KillDTO("Kill", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName());
+        return new ActionDTO("Kill", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName() ,null,null,null,null,null,null,null,null,null);
     }
 
     private EntityInstance getEntityForInvoke(ActionContext context) {

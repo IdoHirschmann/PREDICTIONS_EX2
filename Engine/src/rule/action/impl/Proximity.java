@@ -23,15 +23,15 @@ public class Proximity extends AbstractAction {
         this.of = of;
         this.actionList = actionList;
     }
-
     @Override
     public ActionDTO createDTO() {
+        ProximityDTO proximityDTO = new ProximityDTO(of.GetSimpleValue(), Integer.toString(actionList.size()));
         if(getSecondaryEntity() == null) {
-            return new ProximityDTO("Proximity", getPrimaryEntityDefinition().getName(), null,
-                    of.GetSimpleValue(), Integer.toString(actionList.size()));
+            return new ActionDTO("Proximity", getPrimaryEntityDefinition().getName(), null,
+                    null,null,null,null,null,proximityDTO,null,null,null);
         }
-        return new ProximityDTO("Proximity", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName(),
-                of.GetSimpleValue(), Integer.toString(actionList.size()));
+        return new ActionDTO("Proximity", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName(),
+                null,null,null,null,null,proximityDTO,null,null,null);
     }
 
     @Override

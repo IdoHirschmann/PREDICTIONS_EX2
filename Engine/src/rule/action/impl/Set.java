@@ -23,14 +23,18 @@ public class Set extends AbstractAction {
         this.property = property;
         this.value = value;
     }
+
     @Override
     public ActionDTO createDTO() {
+        SetDTO setDTO = new SetDTO( value.GetSimpleValue(), property);
         if(getSecondaryEntity() == null) {
-            return new SetDTO("Set", getPrimaryEntityDefinition().getName(), null,
-                    value.GetSimpleValue(), property);
+            return new ActionDTO("Set", getPrimaryEntityDefinition().getName(), null,
+                    null,null,null,null,null,null,null,setDTO,null
+            );
         }
-        return new SetDTO("Set", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName(),
-                value.GetSimpleValue(), property);
+        return new ActionDTO("Set", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName(),
+                null,null,null,null,null,null,null,setDTO,null
+        );
     }
     private EntityInstance getEntityForInvoke(ActionContext context) {
         if(context.getPrimaryEntityInstance().getEntType().equals(getPrimaryEntityDefinition().getName())) {

@@ -1,12 +1,11 @@
 package option2.ActionDTO;
 
-public class ProximityDTO extends ActionDTO{
+public class ProximityDTO{
 
     private String depthOfEnvironment;
     private String numOfActionsForMeetsBetweenEntities;
 
-    public ProximityDTO(String name, String mainEntityName, String secondaryEntityName, String depthOfEnvironment, String numOfActionsForMeetsBetweenEntities) {
-        super(name, mainEntityName, secondaryEntityName);
+    public ProximityDTO(String depthOfEnvironment, String numOfActionsForMeetsBetweenEntities) {
         this.depthOfEnvironment = depthOfEnvironment;
         this.numOfActionsForMeetsBetweenEntities = numOfActionsForMeetsBetweenEntities;
     }

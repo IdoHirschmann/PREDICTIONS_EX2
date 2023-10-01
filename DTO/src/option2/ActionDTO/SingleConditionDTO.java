@@ -1,6 +1,6 @@
 package option2.ActionDTO;
 
-public class SingleConditionDTO extends ActionDTO {
+public class SingleConditionDTO {
 
     private final String property;
     private final String value;
@@ -8,9 +8,8 @@ public class SingleConditionDTO extends ActionDTO {
     private final Integer thisActionAmount;
     private final Integer elseActionAmount;
 
-    public SingleConditionDTO(String name, String mainEntityName, String secondaryEntityName, String property,
+    public SingleConditionDTO(String property,
                               String value, String operator, Integer thisActionAmount, Integer elseActionAmount) {
-        super(name, mainEntityName, secondaryEntityName);
         this.property = property;
         this.value = value;
         this.operator = operator;

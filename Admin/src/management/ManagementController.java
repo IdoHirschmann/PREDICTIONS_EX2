@@ -46,8 +46,6 @@ public class ManagementController {
     public void initialize() throws IOException {
         Gson gson = new Gson();
 
-        // MediaType mediaType = MediaType.parse("text/plain");
-        //RequestBody body = RequestBody.create(mediaType, "");
         Request request = new Request.Builder()
                 .url("http://localhost:8080/Predictions/get_simulations_name")
                 .build();
@@ -57,6 +55,7 @@ public class ManagementController {
         List<SimulationNameDTO> nameDTOList = gson.fromJson(response.body().string(), listType);
 
         detailsHBoxController.initializeDetailsData(nameDTOList);
+        threadPoolManagementController.manageInfo();
     }
     @FXML
     void OKButtonClicked(ActionEvent event) {
@@ -97,7 +96,6 @@ public class ManagementController {
             Gson gson = new Gson();
             currentFileLabel.setText(selectedFile.getAbsolutePath());
 
-           // RequestBody simulationNamesBody = RequestBody.create(mediaType, "");
             Request simulationNamesRequest = new Request.Builder()
                     .url("http://localhost:8080/Predictions/get_simulations_name")
                     .build();
@@ -110,8 +108,18 @@ public class ManagementController {
         }
     }
     @FXML
-    void threadsCountButtonClicked(ActionEvent event) {
+    void threadsCountButtonClicked(ActionEvent event) throws IOException {
         Integer newThreadCount = threadPoolManagementController.getThreadsCounter();
-        //todo
+        String url = "http://localhost:8080/Predictions/set_num_of_thread?num=" + newThreadCount.toString();
+
+        MediaType mediaType = MediaType.parse("text/plain");
+        RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("num","")
+                .build();
+        Request request = new Request.Builder()
+                .url(url)
+                .method("POST", body)
+                .build();
+        Response response = client.newCall(request).execute();
     }
 }

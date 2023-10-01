@@ -26,12 +26,15 @@ public class Decrease extends AbstractNumericAction {
 
     @Override
     public ActionDTO createDTO() {
+        DecreaseDTO decreaseDTO = new DecreaseDTO(getResultProp(), by.GetSimpleValue());
         if(getSecondaryEntity() == null) {
-            return new DecreaseDTO("Decrease", getPrimaryEntityDefinition().getName(), null,
-                    getResultProp(), by.GetSimpleValue());
+            return new ActionDTO("Decrease", getPrimaryEntityDefinition().getName(), null,
+                    null,null,decreaseDTO,null,null,null,null,null,null
+            );
         }
-        return new DecreaseDTO("Decrease", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName(),
-                getResultProp(), by.GetSimpleValue());
+        return new ActionDTO("Decrease", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName(),
+                null,null,decreaseDTO,null,null,null,null,null,null
+        );
     }
 
     @Override

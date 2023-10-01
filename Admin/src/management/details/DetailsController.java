@@ -25,6 +25,10 @@ public class DetailsController {
     @FXML
     private SimulationBreakdownController simulationBreakdownController;
 
+    @FXML
+    public void initialize() throws IOException {
+        simulationBreakdownController.setDetailsScreenController(this);
+    }
     public void entitiesShowButtonClicked(EntityDefinitionDTO EntityData) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/management/details/selectedComponent/entity/EntityDetails.fxml"));
@@ -82,7 +86,9 @@ public class DetailsController {
         }
     }
 
-
+    public void clearSelectedComponent(){
+        selectedComponentPane.getChildren().clear();
+    }
     public void initializeDetailsData(List<SimulationNameDTO> simulationNameDTOS) {
         simulationBreakdownController.initializeDetailsData(simulationNameDTOS);
     }

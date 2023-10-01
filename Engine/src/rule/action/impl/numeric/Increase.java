@@ -25,12 +25,16 @@ public class Increase extends AbstractNumericAction {
 
     @Override
     public ActionDTO createDTO() {
+        IncreaseDTO increaseDTO = new IncreaseDTO( getResultProp(), by.GetSimpleValue());
         if(getSecondaryEntity() == null) {
-            return new IncreaseDTO("Increase", getPrimaryEntityDefinition().getName(), null,
-                    getResultProp(), by.GetSimpleValue());
+
+            return new ActionDTO("Increase", getPrimaryEntityDefinition().getName(), null,
+                    increaseDTO,null,null,null,null,null,null,null,null
+            );
         }
-        return new IncreaseDTO("Increase", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName(),
-                getResultProp(), by.GetSimpleValue());
+        return new ActionDTO("Increase", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName(),
+                increaseDTO,null,null,null,null,null,null,null,null
+        );
     }
 
     @Override

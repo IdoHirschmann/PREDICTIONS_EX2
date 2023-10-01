@@ -1,12 +1,11 @@
 package option2.ActionDTO;
 
-public class DecreaseDTO extends ActionDTO {
+public class DecreaseDTO  {
 
     private String property;
     private String by;
 
-    public DecreaseDTO(String name, String mainEntityName, String secondaryEntityName, String property, String by) {
-        super(name, mainEntityName, secondaryEntityName);
+    public DecreaseDTO(String property, String by) {
         this.property = property;
         this.by = by;
     }

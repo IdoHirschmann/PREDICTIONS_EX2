@@ -21,14 +21,18 @@ public class MultipleCondition extends AbstractCondition {
         this.conditions = conditions;
         this.logic = logic;
     }
+
     @Override
     public ActionDTO createDTO() {
+        MultipleConditionDTO multipleConditionDTO = new MultipleConditionDTO(  logic.toString(), thenAmount(), elseAmount());
         if(getSecondaryEntity() == null) {
-            return new MultipleConditionDTO("Multiple Condition", getPrimaryEntityDefinition().getName(), null,
-                    logic.toString(), thenAmount(), elseAmount());
+            return new ActionDTO("Multiple Condition", getPrimaryEntityDefinition().getName(), null,
+                    null,null,null,null,multipleConditionDTO,null,null,null,null
+            );
         }
-        return new MultipleConditionDTO("Multiple Condition", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName(),
-                logic.toString(), thenAmount(), elseAmount());
+        return new ActionDTO("Multiple Condition", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName(),
+                null,null,null,null,multipleConditionDTO,null,null,null,null
+        );
     }
 
     @Override

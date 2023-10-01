@@ -2,6 +2,7 @@ package management.details.selectedComponent.rule.action.decrease;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import option2.ActionDTO.ActionDTO;
 import option2.ActionDTO.DecreaseDTO;
 
 public class DecreaseDataController {
@@ -16,9 +17,9 @@ public class DecreaseDataController {
     private Label secondEntityName;
 
 
-    public void SetData(DecreaseDTO decreaseDTO) {
-        by.setText(decreaseDTO.getBy());
-        property.setText(decreaseDTO.getProperty());
+    public void SetData(ActionDTO decreaseDTO) {
+        by.setText(decreaseDTO.getDecreaseDTO().getBy());
+        property.setText(decreaseDTO.getDecreaseDTO().getProperty());
         mainEntityName.setText(decreaseDTO.getMainEntityName());
 
         if(decreaseDTO.getSecondaryEntityName() == null) {

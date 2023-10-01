@@ -2,6 +2,7 @@ package management.details.selectedComponent.rule.action.calculation;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import option2.ActionDTO.ActionDTO;
 import option2.ActionDTO.CalculationDTO;
 
 public class CalculationDataController {
@@ -20,12 +21,12 @@ public class CalculationDataController {
     private Label secondEntityName;
 
 
-    public void SetData(CalculationDTO calculationDTO) {
+    public void SetData(ActionDTO calculationDTO) {
         actionName.setText(calculationDTO.getName());
-        arg1.setText(calculationDTO.getArg1());
-        arg2.setText(calculationDTO.getArg2());
+        arg1.setText(calculationDTO.getCalculationDTO().getArg1());
+        arg2.setText(calculationDTO.getCalculationDTO().getArg2());
         mainEntityName.setText(calculationDTO.getMainEntityName());
-        reasultProp.setText(calculationDTO.getResultProp());
+        reasultProp.setText(calculationDTO.getCalculationDTO().getResultProp());
 
         if(calculationDTO.getSecondaryEntityName() == null) {
             secondEntityName.setText("None");

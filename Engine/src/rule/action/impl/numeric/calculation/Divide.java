@@ -21,12 +21,15 @@ public class Divide extends AbstractCalculation {
 
     @Override
     public ActionDTO createDTO() {
+        CalculationDTO calculationDTO = new CalculationDTO( getFirstArgument().GetSimpleValue(), getSecondArgument().GetSimpleValue(), getResultProp());
         if(getSecondaryEntity() == null) {
-            return new CalculationDTO("Divide", getPrimaryEntityDefinition().getName(), null,
-                    getFirstArgument().GetSimpleValue(), getSecondArgument().GetSimpleValue(), getResultProp());
+            return new ActionDTO("Divide", getPrimaryEntityDefinition().getName(), null,
+                    null,calculationDTO,null,null,null,null,null,null,null
+            );
         }
-        return new CalculationDTO("Divide", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName(),
-                getFirstArgument().GetSimpleValue(), getSecondArgument().GetSimpleValue(), getResultProp());
+        return new ActionDTO("Divide", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName(),
+                null,calculationDTO,null,null,null,null,null,null,null
+        );
     }
 
     @Override

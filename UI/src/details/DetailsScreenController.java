@@ -3,7 +3,6 @@ package details;
 import details.selectedComponent.entity.EntityDetailsController;
 import details.selectedComponent.environment.EnvironmentDetailsController;
 import details.selectedComponent.grid.GridDetailsController;
-import details.selectedComponent.rule.RulesDetailsController;
 import details.selectedComponent.termination.TerminationDetailsController;
 import details.simulationBreakdown.SimulationBreakdownController;
 import javafx.fxml.FXML;
@@ -76,16 +75,16 @@ public class DetailsScreenController {
 
 
     public void rulesShowButtonClicked(RulesDTO rulesDTO) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/details/selectedComponent/rule/RulesDetails.fxml"));
-            Parent ruleContent = loader.load();
-            RulesDetailsController rulesDetailsController = loader.getController();
-            rootDetails.getItems().set(1, ruleContent);
-
-            rulesDetailsController.setAllDataMembers(rulesDTO);
-
-        } catch (IOException e) {
-        }
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/details/selectedComponent/rule/RulesDetails.fxml"));
+//            Parent ruleContent = loader.load();
+//            RulesDetailsController rulesDetailsController = loader.getController();
+//            rootDetails.getItems().set(1, ruleContent);
+//
+//            rulesDetailsController.setAllDataMembers(rulesDTO);
+//
+//        } catch (IOException e) {
+//        }
     }
 
     public void terminationShowButtonClicked(TerminationDTO terminationDTO) {

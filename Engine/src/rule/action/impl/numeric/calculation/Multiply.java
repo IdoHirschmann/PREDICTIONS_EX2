@@ -18,15 +18,17 @@ public class Multiply extends AbstractCalculation {
     public Multiply(EntityDefinition primaryEntityDefinition, SecondaryEntity secondaryEntityDefinition, String resultProp, Expression firstArgument, Expression secondArgument) {
         super(primaryEntityDefinition, secondaryEntityDefinition,ActionType.MULTIPLY, resultProp, firstArgument, secondArgument);
     }
-
     @Override
     public ActionDTO createDTO() {
+        CalculationDTO calculationDTO = new CalculationDTO(getFirstArgument().GetSimpleValue(), getSecondArgument().GetSimpleValue(), getResultProp());
         if(getSecondaryEntity() == null) {
-            return new CalculationDTO("Multiply", getPrimaryEntityDefinition().getName(), null,
-                    getFirstArgument().GetSimpleValue(), getSecondArgument().GetSimpleValue(), getResultProp());
+            return new ActionDTO("Multiply", getPrimaryEntityDefinition().getName(), null,
+                    null,calculationDTO,null,null,null,null,null,null,null
+            );
         }
-        return new CalculationDTO("Multiply", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName(),
-                getFirstArgument().GetSimpleValue(), getSecondArgument().GetSimpleValue(), getResultProp());
+        return new ActionDTO("Multiply", getPrimaryEntityDefinition().getName(), getSecondaryEntity().getEntityName(),
+                null,calculationDTO,null,null,null,null,null,null,null
+        );
     }
 
     @Override

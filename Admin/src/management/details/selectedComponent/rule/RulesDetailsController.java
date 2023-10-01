@@ -79,39 +79,39 @@ public class RulesDetailsController {
     private void setActionDetailsPain(ActionDTO actionDTO) {
         switch (actionDTO.getName()) {
             case "Increase":
-                createIncreaseAction((IncreaseDTO)actionDTO);
+                createIncreaseAction(actionDTO);
                 break;
             case "Decrease":
-                createDecreaseAction((DecreaseDTO)actionDTO);
+                createDecreaseAction(actionDTO);
                 break;
             case "Multiply":
-                createCalculationAction((CalculationDTO)actionDTO);
+                createCalculationAction(actionDTO);
                 break;
             case "Divide":
-                createCalculationAction((CalculationDTO)actionDTO);
+                createCalculationAction(actionDTO);
                 break;
             case "Multiple Condition":
-                createMulConAction((MultipleConditionDTO)actionDTO);
+                createMulConAction(actionDTO);
                 break;
             case "Single Condition":
-                createSinConAction((SingleConditionDTO)actionDTO);
+                createSinConAction(actionDTO);
                 break;
             case "Kill":
-                createKillAction((KillDTO)actionDTO);
+                createKillAction(actionDTO);
                 break;
             case "Set":
-                createSetAction((SetDTO)actionDTO);
+                createSetAction(actionDTO);
                 break;
             case "Proximity":
-                createProximityAction((ProximityDTO)actionDTO);
+                createProximityAction(actionDTO);
                 break;
             case "Replace":
-                createReplaceAction((ReplaceDTO)actionDTO);
+                createReplaceAction(actionDTO);
                 break;
         }
     }
 
-    private void createIncreaseAction(IncreaseDTO actionDTO) {
+    private void createIncreaseAction(ActionDTO actionDTO) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/management/details/selectedComponent/rule/action/increase/IncreaseData.fxml"));
             Parent increaseContent = loader.load();
@@ -125,7 +125,7 @@ public class RulesDetailsController {
         }
     }
 
-    private void createDecreaseAction(DecreaseDTO actionDTO) {
+    private void createDecreaseAction(ActionDTO actionDTO) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/management/details/selectedComponent/rule/action/decrease/DecreaseData.fxml"));
             Parent decreaseContent = loader.load();
@@ -139,7 +139,7 @@ public class RulesDetailsController {
         }
     }
 
-    private void createCalculationAction(CalculationDTO actionDTO) {
+    private void createCalculationAction(ActionDTO actionDTO) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/management/details/selectedComponent/rule/action/calculation/CalculationData.fxml"));
             Parent calculationContent = loader.load();
@@ -153,7 +153,7 @@ public class RulesDetailsController {
         }
     }
 
-    private void createMulConAction(MultipleConditionDTO actionDTO) {
+    private void createMulConAction(ActionDTO actionDTO) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/management/details/selectedComponent/rule/action/multipleCondition/MultipleConditionData.fxml"));
             Parent multipleConditionContent = loader.load();
@@ -167,7 +167,7 @@ public class RulesDetailsController {
         }
     }
 
-    private void createSinConAction(SingleConditionDTO actionDTO) {
+    private void createSinConAction(ActionDTO actionDTO) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/management/details/selectedComponent/rule/action/singleCondition/SingleConditionData.fxml"));
             Parent singleConditionContent = loader.load();
@@ -181,7 +181,7 @@ public class RulesDetailsController {
         }
     }
 
-    private void createKillAction(KillDTO actionDTO) {
+    private void createKillAction(ActionDTO actionDTO) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/management/details/selectedComponent/rule/action/kill/KillData.fxml"));
             Parent killContent = loader.load();
@@ -195,7 +195,7 @@ public class RulesDetailsController {
         }
     }
 
-    private void createSetAction(SetDTO actionDTO) {
+    private void createSetAction(ActionDTO actionDTO) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/management/details/selectedComponent/rule/action/set/SetData.fxml"));
             Parent setContent = loader.load();
@@ -209,7 +209,7 @@ public class RulesDetailsController {
         }
     }
 
-    private void createProximityAction(ProximityDTO actionDTO) {
+    private void createProximityAction(ActionDTO actionDTO) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/management/details/selectedComponent/rule/action/proximity/ProximityData.fxml"));
             Parent proximityContent = loader.load();
@@ -223,7 +223,7 @@ public class RulesDetailsController {
         }
     }
 
-    private void createReplaceAction(ReplaceDTO actionDTO) {
+    private void createReplaceAction(ActionDTO actionDTO) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/management/details/selectedComponent/rule/action/replace/ReplaceData.fxml"));
             Parent replaceContent = loader.load();

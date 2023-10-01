@@ -10,15 +10,18 @@ import manager.FilesManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "Get simulations name servlet", urlPatterns = "/get_simulations_name")
-public class showLoadedSimulationsDetailsServlet extends HttpServlet {
+@WebServlet(name = "Get simulations details servlet", urlPatterns = "/get_simulations_details")
+public class SimulationDetailsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         FilesManager manager = (FilesManager) getServletContext().getAttribute("manager");
 
+        String chosenSim = req.getParameter("name");
+
         Gson gson = new Gson();
-        String json = gson.toJson(manager.getSimulationNameDtoList());
+
+        String json = gson.toJson(manager.getSimDefinition(chosenSim));
 
         resp.setContentType("application/json");
 

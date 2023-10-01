@@ -2,6 +2,7 @@ package management.details.selectedComponent.rule.action.proximity;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import option2.ActionDTO.ActionDTO;
 import option2.ActionDTO.ProximityDTO;
 
 public class ProximityDataController {
@@ -16,9 +17,9 @@ public class ProximityDataController {
     private Label targetEntityName;
 
 
-    public void SetData(ProximityDTO proximityDTO) {
-        actionCount.setText(proximityDTO.getNumOfActionsForMeetsBetweenEntities());
-        environmentDepth.setText(proximityDTO.getDepthOfEnvironment());
+    public void SetData(ActionDTO proximityDTO) {
+        actionCount.setText(proximityDTO.getProximityDTO().getNumOfActionsForMeetsBetweenEntities());
+        environmentDepth.setText(proximityDTO.getProximityDTO().getDepthOfEnvironment());
         sourceEntityName.setText(proximityDTO.getMainEntityName());
 
         if(proximityDTO.getSecondaryEntityName() == null) {

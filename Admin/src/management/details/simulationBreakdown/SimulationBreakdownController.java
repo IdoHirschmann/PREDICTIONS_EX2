@@ -1,5 +1,7 @@
 package management.details.simulationBreakdown;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import ex3DTO.SimulationNameDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,11 +9,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.VBox;
 import management.details.DetailsController;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import option2.EntityDefinitionDTO;
 import option2.PropertyDefinitionDTO;
 import option2.RulesDTO;
 import option2.SimulationDefinitionDTO;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +49,7 @@ public class SimulationBreakdownController {
     private VBox simulationBreakdownVBox;
     private DetailsController detailsScreenController;
     private SimulationDefinitionDTO simulationDefinitionDTO;
+    private OkHttpClient client = new OkHttpClient().newBuilder().build();
 
 
     public void setDetailsScreenController(DetailsController detailsScreenController) {
@@ -108,23 +116,57 @@ public class SimulationBreakdownController {
     }
 
     @FXML
-    void chooseSimulationButtonClicked(ActionEvent event) {
-        //todo
+    void chooseSimulationButtonClicked(ActionEvent event) throws IOException {
+
+        Gson gson = new Gson();
+
+        Request request = new Request.Builder()
+                .url("http://localhost:8080/Predictions/get_simulations_name")
+                .build();
+        Response response = client.newCall(request).execute();
+
+        Type listType = new TypeToken<List<SimulationNameDTO>>() {}.getType();
+        List<SimulationNameDTO> nameDTOList = gson.fromJson(response.body().string(), listType);
+
+        for(SimulationNameDTO simulationNameDTO: nameDTOList){
+            choiceBoxSimulations.getItems().add(simulationNameDTO.getName().toString());
+        }
+
         chooseSimulationVBox.setVisible(true);
         simulationBreakdownVBox.setVisible(false);
         choiceBoxEntites.setValue(null);
+        choiceBoxEntites.getItems().clear();
+        choiceBoxRules.getItems().clear();
+        choiceBoxEnvironment.getItems().clear();
         choiceBoxRules.setValue(null);
         choiceBoxEnvironment.setValue(null);
+
+        detailsScreenController.clearSelectedComponent();
     }
 
     @FXML
-    void simulationsButtonClicked(ActionEvent event) {
+    void simulationsButtonClicked(ActionEvent event) throws IOException {
         String simulationName = choiceBoxSimulations.getSelectionModel().getSelectedItem();
         if(simulationName != null) {
-            //todo
+            Gson gson = new Gson();
+
+            String url  = "http://localhost:8080/Predictions//get_simulations_details?name=";
+
+            Request request = new Request.Builder()
+                    .url(url + simulationName)
+                    .build();
+            Response response = client.newCall(request).execute();
+            simulationDefinitionDTO = gson.fromJson(response.body().string(),SimulationDefinitionDTO.class);
+
+
+            initializeRules(simulationDefinitionDTO.getRulesDTOList());
+            initializeEntities(simulationDefinitionDTO.getEntityDefinitionDTOList());
+            initializeEnvironments(simulationDefinitionDTO.getEnvironmentDefenitionDTOList());
+
             chooseSimulationVBox.setVisible(false);
             simulationBreakdownVBox.setVisible(true);
             choiceBoxSimulations.setValue(null);
+            choiceBoxSimulations.getItems().clear();
         }
     }
 }

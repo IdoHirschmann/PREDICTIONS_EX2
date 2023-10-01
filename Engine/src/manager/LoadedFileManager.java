@@ -37,11 +37,6 @@ public class LoadedFileManager {
     private int currIDNum;
     private Integer simDoneCounter = 0;
 
-    //  private Boolean isNewSimLoaded = false;
-    //  private Integer numOfThreads;
-    //  private XmlLoader xmlLoader;
-    //  private ThreadPoolExecutor executorService;
-
     public LoadedFileManager(SimulationDefinition simulationDefinition) {
         this.simulationDefinition = simulationDefinition;
         simulationExecutionDetailsMap = new HashMap<>();
@@ -66,6 +61,9 @@ public class LoadedFileManager {
         }
     }
 
+    public Integer getSimDoneCounter() {
+        return simDoneCounter;
+    }
 
     public EnvironmentDefinitionListDTO runSimulationStep1() {
         List<EnvironmentDefinitionDTO> environmentDefinitionDTOList = new ArrayList<>();
@@ -133,7 +131,10 @@ public class LoadedFileManager {
         return simulationExecutionDetailsMap.get(simulationIDDTO.getId()).getEntityPopulationDTOList();
     }
     public SimulationDefinitionDTO showCurrentSimulationData() {
-        TerminationDTO terminationDTO = new TerminationDTO(simulationDefinition.getTermination().getTicks(), simulationDefinition.getTermination().getSeconds());
+        TerminationDTO terminationDTO = null;
+        if(simulationDefinition.getTermination() != null){
+            terminationDTO = new TerminationDTO(simulationDefinition.getTermination().getTicks(), simulationDefinition.getTermination().getSeconds());
+        }
         List<RulesDTO> rulesDTOList = createRulesDTOList();
         List<EntityDefinitionDTO> entityDefinitionDTOList = createEntityDTOlist();
         List<PropertyDefinition> environmentDefenitionList = new ArrayList<>(simulationDefinition.getEnvironmentsDef().values());

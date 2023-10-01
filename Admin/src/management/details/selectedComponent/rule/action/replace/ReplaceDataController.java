@@ -2,6 +2,7 @@ package management.details.selectedComponent.rule.action.replace;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import option2.ActionDTO.ActionDTO;
 import option2.ActionDTO.ReplaceDTO;
 
 public class ReplaceDataController {
@@ -13,8 +14,8 @@ public class ReplaceDataController {
     @FXML
     private Label mode;
 
-    public void SetData(ReplaceDTO replaceDTO) {
-        mode.setText(replaceDTO.getMode());
+    public void SetData(ActionDTO replaceDTO) {
+        mode.setText(replaceDTO.getReplaceDTO().getMode());
         killEntityName.setText(replaceDTO.getMainEntityName());
 
         if(replaceDTO.getSecondaryEntityName() == null) {

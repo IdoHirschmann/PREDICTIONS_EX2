@@ -2,6 +2,7 @@ package management.details.selectedComponent.rule.action.multipleCondition;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import option2.ActionDTO.ActionDTO;
 import option2.ActionDTO.MultipleConditionDTO;
 
 public class MultipleConditionDataController {
@@ -22,20 +23,20 @@ public class MultipleConditionDataController {
     @FXML
     private Label thisCount;
 
-    public void SetData(MultipleConditionDTO multipleConditionDTO) {
-        if(multipleConditionDTO.getElseActionAmount() == null) {
+    public void SetData(ActionDTO multipleConditionDTO) {
+        if(multipleConditionDTO.getMultipleConditionDTO().getElseActionAmount() == null) {
             elseCount.setText(" --- ");
         }
         else {
-            elseCount.setText(Integer.toString(multipleConditionDTO.getElseActionAmount()));
+            elseCount.setText(Integer.toString(multipleConditionDTO.getMultipleConditionDTO().getElseActionAmount()));
         }
-        logical.setText(multipleConditionDTO.getLogic());
+        logical.setText(multipleConditionDTO.getMultipleConditionDTO().getLogic());
         mainEntityName.setText(multipleConditionDTO.getMainEntityName());
-        if(multipleConditionDTO.getThisActionAmount() == null) {
+        if(multipleConditionDTO.getMultipleConditionDTO().getThisActionAmount() == null) {
             thisCount.setText(" --- ");
         }
         else {
-            thisCount.setText(Integer.toString(multipleConditionDTO.getThisActionAmount()));
+            thisCount.setText(Integer.toString(multipleConditionDTO.getMultipleConditionDTO().getThisActionAmount()));
         }
 
         if(multipleConditionDTO.getSecondaryEntityName() == null) {

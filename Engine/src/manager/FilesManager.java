@@ -1,8 +1,10 @@
 package manager;
 
 import ex2DTO.QueueInfoDTO;
+import ex2DTO.SimulationDetailsDTO;
 import ex3DTO.SimulationNameDTO;
 import option1.XmlFullPathDTO;
+import option2.SimulationDefinitionDTO;
 import option3.EntityPopulationDTO;
 import option3.EnvironmentInitDTO;
 import option3.SimulationFinishDTO;
@@ -49,9 +51,24 @@ public class FilesManager {
         return res;
     }
 
-    //todo
-//    public QueueInfoDTO getQueueInfo() {
-//        return new QueueInfoDTO(executorService.getActiveCount(), executorService.getQueue().size(), simDoneCounter);
-//    }
+    public SimulationDefinitionDTO getSimDefinition(String sim){
+        return loadedFileManagerMap.get(Integer.parseInt(sim)).showCurrentSimulationData();
+    }
+
+
+    public QueueInfoDTO getQueueInfo() {
+        int simDoneCounter = 0;
+
+        List<LoadedFileManager> lst = new ArrayList<>(loadedFileManagerMap.values());
+
+        for(LoadedFileManager loadedFileManager : lst){
+            simDoneCounter += loadedFileManager.getSimDoneCounter();
+        }
+        return new QueueInfoDTO(executorService.getActiveCount(), executorService.getQueue().size(), simDoneCounter);
+    }
+
+    public void changeThreadNumber(Integer newNum){
+        executorService.setCorePoolSize(newNum);
+    }
 
 }

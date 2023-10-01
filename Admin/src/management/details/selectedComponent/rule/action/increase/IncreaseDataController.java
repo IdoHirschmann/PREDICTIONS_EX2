@@ -2,6 +2,7 @@ package management.details.selectedComponent.rule.action.increase;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import option2.ActionDTO.ActionDTO;
 import option2.ActionDTO.IncreaseDTO;
 
 public class IncreaseDataController {
@@ -18,9 +19,9 @@ public class IncreaseDataController {
     @FXML
     private Label secondEntityName;
 
-    public void SetData(IncreaseDTO increaseDTO) {
-        by.setText(increaseDTO.getBy());
-        property.setText(increaseDTO.getProperty());
+    public void SetData(ActionDTO increaseDTO) {
+        by.setText(increaseDTO.getIncreaseDTO().getBy());
+        property.setText(increaseDTO.getIncreaseDTO().getProperty());
         mainEntityName.setText(increaseDTO.getMainEntityName());
 
         if(increaseDTO.getSecondaryEntityName() == null) {
