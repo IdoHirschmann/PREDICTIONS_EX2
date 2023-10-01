@@ -12,17 +12,14 @@ public class HeaderController {
     public void setMainPageController(MainPageController mainPageController) {
         this.mainPageController = mainPageController;
     }
-
     @FXML
     void allocationButtonClicked(ActionEvent event) {
-
+        mainPageController.allocationsScreen();
     }
-
     @FXML
     void executionsHistoryButtonClicked(ActionEvent event) {
 
     }
-
     @FXML
     void managementButtonClicked(ActionEvent event) {
         mainPageController.managementScreen();

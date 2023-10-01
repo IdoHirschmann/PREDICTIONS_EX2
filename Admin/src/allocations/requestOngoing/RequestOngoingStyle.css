@@ -1,0 +1,14 @@
+.requestOngoingButtons {
+    -fx-font-size: 14px;
+    -fx-pref-width: 80px;
+    -fx-background-color: #4CAF50; /* Green background color */
+    -fx-text-fill: white; /* White text color */
+}
+.requestOngoingButtons:hover {
+    -fx-background-color: #158A19;
+}
+
+.requestOngoingLabels {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}

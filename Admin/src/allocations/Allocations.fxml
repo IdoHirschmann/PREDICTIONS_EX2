@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox maxHeight="555.0" maxWidth="1300.0" minHeight="555.0" minWidth="1300.0" prefHeight="555.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="allocations.AllocationsController">
+   <children>
+      <ScrollPane maxHeight="555.0" maxWidth="650.0" minHeight="555.0" minWidth="650.0" prefHeight="555.0" prefWidth="650.0">
+         <content>
+            <VBox fx:id="requestOngoingHBox" maxHeight="550.0" maxWidth="645.0" minHeight="550.0" minWidth="645.0" prefHeight="550.0" prefWidth="645.0" />
+         </content>
+      </ScrollPane>
+      <ScrollPane maxHeight="555.0" maxWidth="650.0" minHeight="555.0" minWidth="650.0" prefHeight="555.0" prefWidth="650.0">
+         <content>
+            <VBox fx:id="requestDoneHBox" maxHeight="550.0" maxWidth="645.0" minHeight="550.0" minWidth="645.0" prefHeight="550.0" prefWidth="645.0" />
+         </content>
+      </ScrollPane>
+   </children>
+</HBox>

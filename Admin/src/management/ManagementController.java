@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import management.details.DetailsController;
 import management.threadPoolManagement.ThreadPoolManagementController;
 import okhttp3.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -47,7 +46,7 @@ public class ManagementController {
     public void initialize() throws IOException {
         Gson gson = new Gson();
 
-       // MediaType mediaType = MediaType.parse("text/plain");
+        // MediaType mediaType = MediaType.parse("text/plain");
         //RequestBody body = RequestBody.create(mediaType, "");
         Request request = new Request.Builder()
                 .url("http://localhost:8080/Predictions/get_simulations_name")

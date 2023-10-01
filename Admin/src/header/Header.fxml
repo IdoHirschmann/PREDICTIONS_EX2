@@ -29,7 +29,7 @@
             <Insets />
          </opaqueInsets>
       </Button>
-      <Button maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#allocationButtonClicked" prefHeight="30.0" prefWidth="200.0" styleClass="HeaderMenuButtons" text="Allocations" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-      <Button minWidth="200.0" mnemonicParsing="false" onAction="#executionsHistoryButtonClicked" prefHeight="30.0" prefWidth="200.0" styleClass="HeaderMenuButtons" text="Executions History" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+      <Button alignment="CENTER" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#allocationButtonClicked" prefHeight="30.0" prefWidth="200.0" styleClass="HeaderMenuButtons" text="Allocations" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+      <Button alignment="CENTER" minWidth="200.0" mnemonicParsing="false" onAction="#executionsHistoryButtonClicked" prefHeight="30.0" prefWidth="200.0" styleClass="HeaderMenuButtons" text="Executions History" GridPane.columnIndex="5" GridPane.rowIndex="1" />
    </children>
 </GridPane>

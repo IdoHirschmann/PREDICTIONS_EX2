@@ -1,0 +1,9 @@
+.requestDoneLabels {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+.requestDeclinedLabels {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: Red;
+}

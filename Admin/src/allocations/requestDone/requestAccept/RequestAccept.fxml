@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox maxHeight="120.0" maxWidth="640.0" minHeight="120.0" minWidth="640.0" prefHeight="120.0" prefWidth="640.0" spacing="30.0" stylesheets="@RequestAcceptStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="allocations.requestDone.requestAccept.RequestAcceptController">
+   <children>
+      <VBox maxHeight="120.0" maxWidth="280.0" minHeight="120.0" minWidth="280.0" prefHeight="120.0" prefWidth="280.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="19.0" prefWidth="115.0" styleClass="requestDoneLabels" text="Simulation Name: " />
+                  <Label fx:id="simulationNameLabel" alignment="CENTER_RIGHT" prefHeight="19.0" prefWidth="146.0" styleClass="requestDoneLabels" text="Label" />
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label styleClass="requestDoneLabels" text="User Name: " />
+                  <Label fx:id="userNameLabel" alignment="CENTER_RIGHT" prefHeight="19.0" prefWidth="186.0" styleClass="requestDoneLabels" text="Label" />
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label styleClass="requestDoneLabels" text="Simulation Quantity:" />
+                  <Label fx:id="simulationQunatityLabel" alignment="CENTER_RIGHT" prefHeight="19.0" prefWidth="133.0" styleClass="requestDoneLabels" text="Label" />
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox maxHeight="120.0" maxWidth="180.0" minHeight="120.0" minWidth="180.0" prefHeight="120.0" prefWidth="180.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label styleClass="requestDoneLabels" text="Terminations: " />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="19.0" prefWidth="68.0" styleClass="requestDoneLabels" text="Ticks: " />
+                  <Label fx:id="ticksLabel" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="158.0" styleClass="requestDoneLabels" text="Label" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="19.0" prefWidth="93.0" styleClass="requestDoneLabels" text="Seconds: " />
+                  <Label fx:id="secondsLabel" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="139.0" styleClass="requestDoneLabels" text="Label" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="19.0" prefWidth="83.0" styleClass="requestDoneLabels" text="By User: " />
+                  <Label fx:id="byUserLabel" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="144.0" styleClass="requestDoneLabels" text="Label" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" spacing="5.0">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <Label styleClass="requestDoneLabels" text="Sim Running: " />
+            <Label fx:id="simRunningLabel" styleClass="requestDoneLabels" text="Label" />
+            <Label styleClass="requestDoneLabels" text="Sim Done: ">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="simDoneLabel" styleClass="requestDoneLabels" text="Label" />
+         </children>
+      </VBox>
+   </children>
+</HBox>
