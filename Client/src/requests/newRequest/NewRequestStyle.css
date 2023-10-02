@@ -1,0 +1,26 @@
+.newRequestLabels{
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.newRequestsCheckBox{
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+#newRequestTitle{
+    -fx-font-size: 22px;
+    -fx-text-fill: #4A70DB;
+    -fx-font-weight: bold;
+}
+
+#newRequestSubmitButton{
+    -fx-font-size: 14px;
+    -fx-pref-width: 80px;
+    -fx-background-color: #4CAF50; /* Green background color */
+    -fx-text-fill: white; /* White text color */
+}
+
+#newRequestSubmitButton:hover{
+    -fx-background-color: #158A19;
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+
+<HBox maxHeight="560.0" maxWidth="1300.0" minHeight="560.0" minWidth="1300.0" prefHeight="560.0" prefWidth="1300.0" spacing="10.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane maxHeight="560.0" maxWidth="440.0" minHeight="560.0" minWidth="440.0" prefHeight="560.0" prefWidth="440.0">
+         <children>
+            <fx:include source="newRequest/NewRequest.fxml" />
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+      </Pane>
+      <Pane maxHeight="560.0" maxWidth="850.0" minHeight="560.0" minWidth="850.0" prefHeight="560.0" prefWidth="850.0" />
+   </children>
+</HBox>

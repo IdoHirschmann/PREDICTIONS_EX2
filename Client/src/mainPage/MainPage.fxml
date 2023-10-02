@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<VBox maxHeight="660.0" maxWidth="1310.0" minHeight="660.0" minWidth="1310.0" prefHeight="660.0" prefWidth="1310.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainPage.MainPageController">
+   <children>
+      <fx:include fx:id="header" source="../header/Header.fxml" />
+      <Pane fx:id="bodyPane" maxHeight="565.0" maxWidth="1310.0" minHeight="565.0" minWidth="1310.0" prefHeight="565.0" prefWidth="1310.0" />
+   </children>
+   <padding>
+      <Insets top="5.0" />
+   </padding>
+</VBox>

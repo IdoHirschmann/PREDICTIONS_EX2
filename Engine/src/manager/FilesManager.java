@@ -20,7 +20,8 @@ import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class FilesManager {
+public class
+FilesManager {
     //todo - every file has in the xml the name of the file that is uniq, so the key will be the name! need to change
     private Map<Integer, LoadedFileManager> loadedFileManagerMap = new HashMap<>();
     private ThreadPoolExecutor executorService = (ThreadPoolExecutor) Executors.newFixedThreadPool(1);

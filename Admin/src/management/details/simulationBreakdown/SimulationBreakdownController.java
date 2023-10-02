@@ -55,7 +55,6 @@ public class SimulationBreakdownController {
     public void setDetailsScreenController(DetailsController detailsScreenController) {
         this.detailsScreenController = detailsScreenController;
     }
-
     @FXML
     private void EntitiesButtonClicked(ActionEvent event) {
         String newValue = choiceBoxEntites.getSelectionModel().getSelectedItem();
@@ -86,12 +85,10 @@ public class SimulationBreakdownController {
             detailsScreenController.environmentShowButtonClicked(environmentDefinitionDTO.get());
         }
     }
-
     @FXML
     private void GridButtonClicked(ActionEvent event) {
         detailsScreenController.gridShowButtonClicked(simulationDefinitionDTO.getGridRows(), simulationDefinitionDTO.getGridCols());
     }
-
     public void initializeDetailsData(List<SimulationNameDTO> simulationNameDTOS) {
         choiceBoxSimulations.getItems().clear();
 
@@ -114,7 +111,6 @@ public class SimulationBreakdownController {
             choiceBoxEnvironment.getItems().add(environmentDefinitionDTO.getName());
         }
     }
-
     @FXML
     void chooseSimulationButtonClicked(ActionEvent event) throws IOException {
 
@@ -143,7 +139,6 @@ public class SimulationBreakdownController {
 
         detailsScreenController.clearSelectedComponent();
     }
-
     @FXML
     void simulationsButtonClicked(ActionEvent event) throws IOException {
         String simulationName = choiceBoxSimulations.getSelectionModel().getSelectedItem();

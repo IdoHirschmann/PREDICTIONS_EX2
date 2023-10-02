@@ -8,7 +8,7 @@ import mainPage.MainPageController;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Predictions admin");
+        primaryStage.setTitle("Predictions client");
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/mainPage/MainPage.fxml"));
         Parent root = loader.load();
