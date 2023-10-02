@@ -1,12 +1,12 @@
 package mainPage;
 
 import header.HeaderController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import requests.RequestsController;
 
 public class MainPageController {
     @FXML
@@ -28,12 +28,13 @@ public class MainPageController {
     public void loadExecutionsScreen() {
         //todo
     }
-    public void loadRequestsScreen() {
+    public void loadRequestsScreen(String name) {
         try {
             if (!isRequestsLoad) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/requests/Requests.fxml"));
                 Parent managementContent = loader.load();
-
+                RequestsController requestController = loader.getController();
+                requestController.setUserName(name);
                 bodyPane.getChildren().clear();
                 bodyPane.getChildren().add(managementContent);
                 isRequestsLoad = true;

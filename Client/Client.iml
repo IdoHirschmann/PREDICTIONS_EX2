@@ -8,5 +8,20 @@
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="DTO" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/lib/annotations-13.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/lib/gson-2.8.8.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/lib/kotlin-stdlib-1.4.10.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/lib/okhttp-4.9.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/lib/okio-2.8.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/src/lib/gson-2.8.8-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>

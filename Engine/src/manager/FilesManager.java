@@ -2,6 +2,7 @@ package manager;
 
 import ex2DTO.QueueInfoDTO;
 import ex2DTO.SimulationDetailsDTO;
+import ex3DTO.NewRequestDTO;
 import ex3DTO.SimulationNameDTO;
 import option1.XmlFullPathDTO;
 import option2.SimulationDefinitionDTO;
@@ -28,8 +29,8 @@ FilesManager {
     private Integer numOfThreads = 1;
     private Integer currIdNum = 1;
     private XmlLoader xmlLoader = new XmlLoader();
-
-
+    private Map<Integer, NewSimulationRunReq> simulationRunReqMap = new HashMap<>();
+    private Integer currReqId = 1;
 
     public SimulationFinishDTO runSimulationStep2(List<EnvironmentInitDTO> environmentInitListDTO, List<EntityPopulationDTO> entityPopulationDTOList, Integer id){
         return loadedFileManagerMap.get(id).runSimulationStep2(environmentInitListDTO,entityPopulationDTOList, executorService);
@@ -72,4 +73,7 @@ FilesManager {
         executorService.setCorePoolSize(newNum);
     }
 
+    public void addSimulationRunReq(NewRequestDTO newSimulationRunReq){
+        simulationRunReqMap.put(currReqId++, new NewSimulationRunReq(newSimulationRunReq));
+    }
 }

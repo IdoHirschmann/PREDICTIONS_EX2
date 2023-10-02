@@ -31,7 +31,8 @@ public class HeaderController {
     }
     @FXML
     void requestsButtonClicked(ActionEvent event) {
-        mainPageController.loadRequestsScreen();
+        mainPageController.loadRequestsScreen(nameLabel.getText());
+
     }
     @FXML
     void resultsButtonClicked(ActionEvent event) {
