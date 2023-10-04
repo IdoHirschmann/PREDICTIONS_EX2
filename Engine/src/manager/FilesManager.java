@@ -31,6 +31,7 @@ FilesManager {
     private XmlLoader xmlLoader = new XmlLoader();
     private Map<Integer, NewSimulationRunReq> simulationRunReqMap = new HashMap<>();
     private Integer currReqId = 1;
+    private List<String> usersList = new ArrayList<>();
 
     public SimulationFinishDTO runSimulationStep2(List<EnvironmentInitDTO> environmentInitListDTO, List<EntityPopulationDTO> entityPopulationDTOList, Integer id){
         return loadedFileManagerMap.get(id).runSimulationStep2(environmentInitListDTO,entityPopulationDTOList, executorService);
@@ -75,5 +76,12 @@ FilesManager {
 
     public void addSimulationRunReq(NewRequestDTO newSimulationRunReq){
         simulationRunReqMap.put(currReqId++, new NewSimulationRunReq(newSimulationRunReq));
+    }
+
+    public void addUser(String userName){
+        usersList.add(userName);
+    }
+    public boolean isUserExist(String userName){
+        return usersList.contains(userName);
     }
 }
