@@ -3,12 +3,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import mainPage.MainPageController;
 
 public class HeaderController {
 
     @FXML
     private Button executionsButton;
+    @FXML
+    private HBox nameHBox;
+    @FXML
+    private HBox loginHBox;
     @FXML
     private Label nameLabel;
     @FXML
@@ -17,6 +23,8 @@ public class HeaderController {
     private Button resultsButton;
     @FXML
     private Button simulationDetailsButton;
+    @FXML
+    private TextField userName;
     private MainPageController mainPageController;
 
     public void setMainPageController(MainPageController mainPageController) {
@@ -42,4 +50,20 @@ public class HeaderController {
     void simulationDetailsButtonClicked(ActionEvent event) {
         mainPageController.loadSimulationDetailsScreen();
     }
+    @FXML
+    void loginButtonClicked(ActionEvent event) {
+        try {
+            
+            loginHBox.setVisible(false);
+            nameHBox.setVisible(true);
+            requestsButton.setVisible(true);
+            resultsButton.setVisible(true);
+            simulationDetailsButton.setVisible(true);
+            executionsButton.setVisible(true);
+            nameLabel.setText(userName.getText());
+        } catch (Exception exception) {
+            //todo - usernameAllreadyExist
+        }
+    }
+
 }

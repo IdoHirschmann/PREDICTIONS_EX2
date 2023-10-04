@@ -1,9 +1,7 @@
 package managerFX;
 
-import details.DetailsScreenController;
-import ex2DTO.IsNewSimLoadDTO;
+import detailsUI.DetailsScreenController;
 import header.PredictionHeaderController;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -114,7 +112,7 @@ public class MainScreenController {
         SimulationDefinitionDTO simulationDefinitionDTO = loadedFileManager.showCurrentSimulationData();
         try {
             if (!isDetailsPresent) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/details/detailsScreen.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/detailsUI/detailsScreen.fxml"));
                 Parent detailsContent = loader.load();
                 detailsController = loader.getController();
 

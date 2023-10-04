@@ -14,6 +14,9 @@
             <Insets />
          </HBox.margin>
       </Pane>
-      <Pane maxHeight="560.0" maxWidth="850.0" minHeight="560.0" minWidth="850.0" prefHeight="560.0" prefWidth="850.0" />
+      <Pane maxHeight="560.0" maxWidth="850.0" minHeight="560.0" minWidth="850.0" prefHeight="560.0" prefWidth="850.0">
+         <children>
+            <fx:include source="requestTable/RequestTable.fxml" />
+         </children></Pane>
    </children>
 </HBox>

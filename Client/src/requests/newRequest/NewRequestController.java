@@ -40,7 +40,6 @@ public class NewRequestController {
     @FXML
     private ChoiceBox<String> simulationChoiceBox;
     private OkHttpClient client = new OkHttpClient().newBuilder().build();
-
     private String userName;
     @FXML
     public void initialize() throws IOException {

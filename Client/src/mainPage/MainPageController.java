@@ -1,5 +1,6 @@
 package mainPage;
 
+import details.DetailsController;
 import header.HeaderController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,7 +50,20 @@ public class MainPageController {
         //todo
     }
     public void loadSimulationDetailsScreen() {
-        //todo
+        try {
+            if (!isSimulationDetailsLoad) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/details/Details.fxml"));
+                Parent simulationDetails = loader.load();
+                DetailsController detailsController = loader.getController();
+                bodyPane.getChildren().clear();
+                bodyPane.getChildren().add(simulationDetails);
+                isRequestsLoad = false;
+                isExecutionLoad = false;
+                isResultsLoad = false;
+                isSimulationDetailsLoad = true;
+            }
+        } catch (Exception e) {
+        }
     }
 
 

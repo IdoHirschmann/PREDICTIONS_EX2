@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<HBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="details.selectedComponent.rule.RulesDetailsController">
+   <children>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="327.0" stylesheets="@RulesDetailsStyle.css">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="690.0" spacing="10.0">
+               <children>
+                  <Label styleClass="labels" text="Name:" />
+                  <Label fx:id="rulleName" styleClass="labels" />
+               </children>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="690.0" spacing="10.0">
+               <children>
+                  <Label styleClass="labels" text="Ticks:" />
+                  <Label fx:id="ticks" styleClass="labels" />
+               </children>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="690.0" spacing="10.0">
+               <children>
+                  <Label styleClass="labels" text="Probability:" />
+                  <Label fx:id="probability" styleClass="labels" />
+               </children>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="690.0" spacing="10.0">
+               <children>
+                  <Label styleClass="labels" text="Number of actions:" />
+                  <Label fx:id="numberOfActions" styleClass="labels" />
+               </children>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="227.0" prefWidth="327.0" spacing="10.0">
+               <children>
+                  <Label styleClass="labels" text="Action types:" />
+                  <ScrollPane prefHeight="230.0" prefWidth="189.0">
+                     <content>
+                        <TreeView fx:id="actionTreeView" prefHeight="205.0" prefWidth="187.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="15.0" top="10.0" />
+               </padding>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <AnchorPane prefHeight="39.0" prefWidth="327.0">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <children>
+                  <Button id="actionButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#SelectActionClicked" prefHeight="39.0" prefWidth="88.0" text="Select Action" AnchorPane.rightAnchor="15.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <Pane fx:id="actionDetails" prefHeight="475.0" prefWidth="363.0" />
+   </children>
+</HBox>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="560.0" maxWidth="850.0" minHeight="560.0" minWidth="850.0" prefHeight="560.0" prefWidth="850.0" spacing="10.0" stylesheets="@RequestTableStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="requests.requestTable.RequestTableController">
+        <children>
+            <Label id="requestTableLable" prefHeight="41.0" prefWidth="196.0" text="Requests Table" />
+            <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="450.0" maxWidth="830.0" minHeight="450.0" minWidth="830.0" prefHeight="450.0" prefWidth="830.0">
+                <content>
+                    <TableView fx:id="requestsTable" maxHeight="448.0" maxWidth="828.0" minHeight="448.0" minWidth="828.0" prefHeight="448.0" prefWidth="828.0">
+                        <columns>
+                            <TableColumn fx:id="serialNumberCol" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="Serial number" />
+                            <TableColumn fx:id="worldNameCol" maxWidth="154.0" minWidth="133.0" prefWidth="154.0" text="World name" />
+                            <TableColumn fx:id="runsCol" maxWidth="160.0" minWidth="133.0" prefWidth="139.0" text="Runs requested" />
+                            <TableColumn fx:id="statusCol" maxWidth="150.0" minWidth="123.0" prefWidth="123.0" text="Status" />
+                            <TableColumn fx:id="runningCol" maxWidth="154.0" minWidth="133.0" prefWidth="137.0" text="Currently running" />
+                            <TableColumn fx:id="endedCol" maxWidth="162.0" minWidth="133.0" prefWidth="141.0" text="Simulations ended" />
+                        </columns>
+                    </TableView>
+                </content>
+            </ScrollPane>
+          <Button id="ExecuteButton" fx:id="executeButton" mnemonicParsing="false" onAction="#executeButtonClicked" prefHeight="39.0" prefWidth="109.0" text="Execute">
+         <VBox.margin>
+            <Insets left="721.0" />
+         </VBox.margin>
+          </Button>
+        </children>
+   <padding>
+      <Insets left="10.0" right="10.0" />
+   </padding>
+    </VBox>
