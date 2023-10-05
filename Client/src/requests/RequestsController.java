@@ -13,5 +13,4 @@ public class RequestsController {
     public void setUserName(String name){
         newRequestController.setUserName(name);
     }
-
 }

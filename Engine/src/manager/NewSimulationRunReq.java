@@ -4,27 +4,48 @@ import ex3DTO.NewRequestDTO;
 import ex3DTO.TerminationTicksSecondsDTO;
 
 public class NewSimulationRunReq {
-
     private String userName;
     private String simulationName;
     private Integer simulationAmount;
     private Boolean isByUser;
     private TerminationTicksSecondsDTO terminationTicksSecondsDTO;
+    private RequestStatus requestStatus;
+    private Integer endingCount = 0;
+    private Integer runningCount = 0;
+    private Integer id;
 
-    public NewSimulationRunReq(String userName, String simulationName, Integer simulationAmount, Boolean isByUser, TerminationTicksSecondsDTO terminationTicksSecondsDTO) {
+    public NewSimulationRunReq(String userName, String simulationName, Integer simulationAmount, Boolean isByUser, TerminationTicksSecondsDTO terminationTicksSecondsDTO, Integer id) {
         this.userName = userName;
         this.simulationName = simulationName;
         this.simulationAmount = simulationAmount;
         this.isByUser = isByUser;
         this.terminationTicksSecondsDTO = terminationTicksSecondsDTO;
+        this.id = id;
+        requestStatus = RequestStatus.APPROVED;
+        //todo - chane to PENDING after testing
     }
 
-    public NewSimulationRunReq(NewRequestDTO newRequestDTO){
-        userName = null; //todo- after add username to dto add it here
+    public NewSimulationRunReq(NewRequestDTO newRequestDTO , Integer id){
+        userName = newRequestDTO.getSimulationName();
         simulationName = newRequestDTO.getSimulationName();
         simulationAmount = newRequestDTO.getSimulationAmount();
         isByUser = newRequestDTO.getByUser();
         terminationTicksSecondsDTO = newRequestDTO.getTerminationTicksSecondsDTO();
+        requestStatus = RequestStatus.APPROVED;
+        //todo - chane to PENDING after testing
+        this.id = id;
+    }
+
+    public RequestStatus getRequestStatus() {
+        return requestStatus;
+    }
+
+    public Integer getEndingCount() {
+        return endingCount;
+    }
+
+    public Integer getRunningCount() {
+        return runningCount;
     }
 
     public String getUserName() {
@@ -41,6 +62,10 @@ public class NewSimulationRunReq {
 
     public Boolean getByUser() {
         return isByUser;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public TerminationTicksSecondsDTO getTerminationTicksSecondsDTO() {
@@ -65,5 +90,17 @@ public class NewSimulationRunReq {
 
     public void setTerminationTicksSecondsDTO(TerminationTicksSecondsDTO terminationTicksSecondsDTO) {
         this.terminationTicksSecondsDTO = terminationTicksSecondsDTO;
+    }
+
+    public void setRequestStatus(RequestStatus requestStatus) {
+        this.requestStatus = requestStatus;
+    }
+
+    public void setEndingCount(Integer endingCount) {
+        this.endingCount = endingCount;
+    }
+
+    public void setRunningCount(Integer runningCount) {
+        this.runningCount = runningCount;
     }
 }

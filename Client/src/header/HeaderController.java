@@ -1,4 +1,5 @@
 package header;
+import error.ErrorDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -77,7 +78,7 @@ public class HeaderController {
                     nameLabel.setText(userName.getText());
 
                 }else {
-                    //todo - usernameAllreadyExist
+                    ErrorDialog.showError(response.body().string());
                 }
             }
 

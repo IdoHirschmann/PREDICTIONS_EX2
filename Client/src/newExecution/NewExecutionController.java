@@ -1,0 +1,175 @@
+package newExecution;
+
+import ex2DTO.SimulationIDDTO;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.BorderPane;
+import mainPage.MainPageController;
+import newExecution.entitiesPopulation.EntityPopulationController;
+import newExecution.environmentInputs.EnvironmentInputsController;
+import newExecution.listener.ClearButtonClickedListener;
+import newExecution.listener.RerunButtonClickedListener;
+import newExecution.listener.StartButtonClickedListener;
+import option2.EntityDefinitionDTO;
+import option3.EntityPopulationDTO;
+import option3.EnvironmentDefinitionListDTO;
+import option3.EnvironmentInitDTO;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class NewExecutionController {
+    @FXML
+    private BorderPane environmentInputs;
+    @FXML
+    private EnvironmentInputsController environmentInputsController;
+    @FXML
+    private BorderPane entityPopulation;
+    @FXML
+    private EntityPopulationController entityPopulationController;
+    @FXML
+    private Button clearButton;
+    @FXML
+    private SplitPane mainSplitPane;
+    @FXML
+    private Button startButton;
+    @FXML
+    private BorderPane mainBorderPain;
+    private MainPageController mainScreenController;
+    private Double originalDividerPosition;
+    private List<StartButtonClickedListener> startListener;
+    private List<ClearButtonClickedListener> clearListener;
+    private List<EnvironmentInitDTO> environmentInitDTOList= new ArrayList<>();
+    private List<EntityPopulationDTO>entityPopulationDTOList = new ArrayList<>();
+    private List<RerunButtonClickedListener> rerunButtonClickedEntitiesListeners= new ArrayList<>();
+    private List<RerunButtonClickedListener> rerunButtonClickedEnvironmentsListeners = new ArrayList<>();
+
+    @FXML
+    public void initialize() {
+        startListener = new LinkedList<>();
+        clearListener = new LinkedList<>();
+        originalDividerPosition = 0.4199; // Store your original value here
+        setDivider();
+        environmentInputsController.setNewExecutionController(this);
+        environmentInitDTOList = new ArrayList<>();
+        entityPopulationController.setNewExecutionController(this);
+    }
+
+    public void addRerunEntityListener(RerunButtonClickedListener rerunButtonClickedListener) {
+        rerunButtonClickedEntitiesListeners.add(rerunButtonClickedListener);
+    }
+    public void addRerunEnvironmentListener(RerunButtonClickedListener rerunButtonClickedListener) {
+        rerunButtonClickedEnvironmentsListeners.add(rerunButtonClickedListener);
+    }
+
+    private void setDivider(){
+        mainSplitPane.setDividerPositions(originalDividerPosition);
+
+        // Add a listener to the divider position
+        mainSplitPane.getDividers().get(0).positionProperty().addListener((observable, oldValue, newValue) -> {
+            // Reset the position to the original value
+            mainSplitPane.setDividerPositions(originalDividerPosition);
+        });
+    }
+
+    public void setEntitiesData(List<EntityDefinitionDTO> entityDefinitionDTOList, int gridSize) {
+        entityPopulationController.setMaxCountLable(gridSize);
+        entityPopulationController.setEntities(entityDefinitionDTOList);
+    }
+
+    public void addToEntityPopulationDTOList(EntityPopulationDTO entityPopulationDTO) {
+        entityPopulationDTOList.add(entityPopulationDTO);
+    }
+    public void addEnvironmentToList(EnvironmentInitDTO environmentInitDTO) {
+        environmentInitDTOList.add(environmentInitDTO);
+    }
+
+    public void setEnvironmentData(EnvironmentDefinitionListDTO environmentDefinitionListDTO) {
+        environmentInputsController.setEnvironmentData(environmentDefinitionListDTO);
+    }
+
+    public void setMainScreenController(MainPageController mainScreenController) {
+        this.mainScreenController = mainScreenController;
+    }
+
+    public void addListenerToStartButton(StartButtonClickedListener listener) {
+        startListener.add(listener);
+    }
+    public void addListenerToClearButton(ClearButtonClickedListener listener) {
+        clearListener.add(listener);
+    }
+
+    @FXML
+    private void clearButtonClicked(ActionEvent event) {
+        for(ClearButtonClickedListener listener : clearListener) {
+            listener.clearOnClicked();
+        }
+
+        entityPopulationController.initialize();
+//        setEntitiesData(loadedFileManager.showCurrentSimulationData().getEntityDefinitionDTOList(),
+//                loadedFileManager.showCurrentSimulationData().getGridCols() * loadedFileManager.showCurrentSimulationData().getGridRows());
+        //todo - http request
+    }
+
+    @FXML
+    private void startButtonClicked(ActionEvent event) {
+        environmentInitDTOList.clear();
+        for(StartButtonClickedListener listener : startListener) {
+            listener.startOnClicked();
+        }
+
+   //     loadedFileManager.runSimulationStep2(environmentInitDTOList, entityPopulationDTOList, null);
+        //todo - http request
+        mainScreenController.loadResultsScreen();
+    }
+
+    public void onRerun(Integer id) {
+//        List<EnvironmentInitDTO> environmentInitDTOListForRerun = loadedFileManager.getEnvironmentRerun(new SimulationIDDTO(id));
+//        List<EntityPopulationDTO> entityPopulationDTOListForRerun = loadedFileManager.getEntityRerun(new SimulationIDDTO(id));
+        //todo - http request
+        int i = 0;
+//
+//        for (EnvironmentInitDTO environmentInitDTO : environmentInitDTOListForRerun) {
+//            rerunButtonClickedEnvironmentsListeners.get(i).onRerun(environmentInitDTO.getNewValue());
+//            i++;
+//        }
+//        i = 0;
+//        for (EntityPopulationDTO entityPopulationDTO : entityPopulationDTOListForRerun) {
+//            rerunButtonClickedEntitiesListeners.get(i).onRerun(entityPopulationDTO.getCount().toString());
+//            i++;
+//        }
+    }
+
+    public void setOnColorChange(String color) {
+        mainBorderPain.setStyle("-fx-background-color: " + color + ";");
+        mainSplitPane.setStyle("-fx-background-color: " + color + ";");
+        entityPopulation.setStyle("-fx-background-color: " + color + ";");
+        environmentInputs.setStyle("-fx-background-color: " + color + ";");
+        entityPopulation.getCenter().setStyle("-fx-background-color: " + color + ";");
+        environmentInputs.getCenter().setStyle("-fx-background-color: " + color + ";");
+
+        entityPopulationController.setOnColorChange(color);
+        environmentInputsController.setOnColorChange(color);
+
+        String newBackgroundColor;
+        switch(color) {
+            case "#EDF0F0":
+                newBackgroundColor = "-fx-background-color: #4CAF50;";
+                clearButton.setStyle(newBackgroundColor);
+                startButton.setStyle(newBackgroundColor);
+                break;
+            case "#D4E6F1":
+                newBackgroundColor = "-fx-background-color: #F3B180;";
+                clearButton.setStyle(newBackgroundColor);
+                startButton.setStyle(newBackgroundColor);
+                break;
+            case "#EBDEF0":
+                newBackgroundColor = "-fx-background-color: #BB98F4;";
+                clearButton.setStyle(newBackgroundColor);
+                startButton.setStyle(newBackgroundColor);
+        }
+    }
+}

@@ -3,6 +3,8 @@ package manager;
 import ex2DTO.QueueInfoDTO;
 import ex2DTO.SimulationDetailsDTO;
 import ex3DTO.NewRequestDTO;
+import ex3DTO.RequestDTO;
+import ex3DTO.RequestListDTO;
 import ex3DTO.SimulationNameDTO;
 import option1.XmlFullPathDTO;
 import option2.SimulationDefinitionDTO;
@@ -72,12 +74,35 @@ FilesManager {
 
     public void changeThreadNumber(Integer newNum){
         executorService.setCorePoolSize(newNum);
+        //todo - need to kill the last thread pool and create a new one
     }
 
     public void addSimulationRunReq(NewRequestDTO newSimulationRunReq){
-        simulationRunReqMap.put(currReqId++, new NewSimulationRunReq(newSimulationRunReq));
+        simulationRunReqMap.put(currReqId++, new NewSimulationRunReq(newSimulationRunReq, currReqId));
+    }
+    public RequestListDTO getRequestForUser(String userName) {
+        List<RequestDTO> requestDTOList = new ArrayList<>();
+
+        simulationRunReqMap.forEach((id, currReq) -> {
+            if((currReq.getRequestStatus() == RequestStatus.APPROVED || currReq.getRequestStatus() == RequestStatus.DECLINE) && currReq.getUserName().equals(userName)) {
+                requestDTOList.add(extractReqDTOFromReq(currReq));
+            }
+        });
+
+        return new RequestListDTO(requestDTOList);
     }
 
+    private RequestDTO extractReqDTOFromReq(NewSimulationRunReq req) {
+        String termination;
+        if(req.getByUser()) {
+            termination = "By user";
+        }
+        else {
+            termination = "By ticks / seconds";
+            //todo - need to tell the tick and seconds amount in the string
+        }
+        return new RequestDTO(req.getUserName(), req.getSimulationName(), req.getSimulationAmount(), termination, req.getId(), req.getRequestStatus().toString(), req.getRunningCount(), req.getEndingCount());
+    }
     public void addUser(String userName){
         usersList.add(userName);
     }

@@ -14,7 +14,7 @@ import javafx.scene.layout.StackPane;
 import manager.LoadedFileManager;
 import managerFX.animation.ColorChangeAnimation;
 import managerFX.animation.FadeAndSpinAnimation;
-import newExecution.NewExecutionController;
+import newExecutionUI.NewExecutionController;
 import option2.SimulationDefinitionDTO;
 import option3.EnvironmentDefinitionListDTO;
 import results.ResultsController;
@@ -134,7 +134,7 @@ public class MainScreenController {
     public void newExecutionScreen() {
         try {
             if (!isNewExecutionPresent) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/newExecution/NewExecution.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/newExecutionUI/NewExecution.fxml"));
                 Parent newExecutionContent = loader.load();
                 newExecutionController = loader.getController();
 
