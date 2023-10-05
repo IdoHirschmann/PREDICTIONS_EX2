@@ -155,7 +155,7 @@ public class NewRequestController {
 
         Gson gson = new Gson();
         String json = gson.toJson(newRequestDTO);
-
+        json = json + "\n";
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
         // Create a request body with the JSON data

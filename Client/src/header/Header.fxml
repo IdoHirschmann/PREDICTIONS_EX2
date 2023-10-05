@@ -34,7 +34,6 @@
             <Insets />
          </opaqueInsets>
       </Button>
-      <Button fx:id="requestsButton" alignment="CENTER" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#requestsButtonClicked" prefHeight="30.0" prefWidth="200.0" styleClass="HeaderMenuButtons" text="Requests" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
       <Button fx:id="executionsButton" alignment="CENTER" minWidth="200.0" mnemonicParsing="false" onAction="#executionsButtonClicked" prefHeight="30.0" prefWidth="200.0" styleClass="HeaderMenuButtons" text="Executions" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="1" />
       <HBox fx:id="nameHBox" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" visible="false" GridPane.columnSpan="3">
          <GridPane.margin>
@@ -46,7 +45,7 @@
          </children>
       </HBox>
       <Button fx:id="resultsButton" alignment="CENTER" minWidth="200.0" mnemonicParsing="false" onAction="#resultsButtonClicked" prefHeight="30.0" prefWidth="200.0" styleClass="HeaderMenuButtons" text="Results" visible="false" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-      <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="1">
+      <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="1">
          <children>
             <HBox fx:id="loginHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
@@ -59,6 +58,7 @@
                   </Button>
                </children>
             </HBox>
+            <Button fx:id="requestsButton" alignment="CENTER" maxWidth="200.0" minWidth="200.0" mnemonicParsing="false" onAction="#requestsButtonClicked" prefHeight="30.0" prefWidth="200.0" styleClass="HeaderMenuButtons" text="Requests" visible="false" />
          </children>
       </StackPane>
    </children>

@@ -31,7 +31,7 @@ FilesManager {
     private Integer numOfThreads = 1;
     private Integer currIdNum = 1;
     private XmlLoader xmlLoader = new XmlLoader();
-    private Map<Integer, NewSimulationRunReq> simulationRunReqMap = new HashMap<>();
+    private final Map<Integer, NewSimulationRunReq> simulationRunReqMap = new HashMap<>();
     private Integer currReqId = 1;
     private List<String> usersList = new ArrayList<>();
 
@@ -94,14 +94,28 @@ FilesManager {
 
     private RequestDTO extractReqDTOFromReq(NewSimulationRunReq req) {
         String termination;
+        Integer ticks = null, seconds = null;
         if(req.getByUser()) {
             termination = "By user";
         }
         else {
             termination = "By ticks / seconds";
-            //todo - need to tell the tick and seconds amount in the string
+            ticks = req.getTerminationTicksSecondsDTO().getTicks();
+            seconds = req.getTerminationTicksSecondsDTO().getSeconds();
         }
-        return new RequestDTO(req.getUserName(), req.getSimulationName(), req.getSimulationAmount(), termination, req.getId(), req.getRequestStatus().toString(), req.getRunningCount(), req.getEndingCount());
+        return new RequestDTO(req.getUserName(), req.getSimulationName(), req.getSimulationAmount(), termination, req.getId(), req.getRequestStatus().toString(), req.getRunningCount(), req.getEndingCount(), ticks,seconds);
+    }
+
+    public RequestListDTO getPendingReqList(){
+        List<RequestDTO> lst = new ArrayList<>();
+
+        simulationRunReqMap.forEach((key,req)-> {
+            if(req.getRequestStatus().equals(RequestStatus.PENDING)){
+                lst.add(extractReqDTOFromReq(req));
+            }
+        });
+
+        return new RequestListDTO(lst);
     }
     public void addUser(String userName){
         usersList.add(userName);

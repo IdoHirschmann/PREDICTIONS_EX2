@@ -9,8 +9,10 @@ public class RequestDTO {
     private String requestStatus;
     private Integer runningCount;
     private Integer endedCount;
+    private Integer ticks;
+    private Integer seconds;
 
-    public RequestDTO(String userName, String simulationName, Integer simulationAmount, String terminationType, Integer id, String requestStatus, Integer runningCount, Integer endedCount) {
+    public RequestDTO(String userName, String simulationName, Integer simulationAmount, String terminationType, Integer id, String requestStatus, Integer runningCount, Integer endedCount, Integer ticks, Integer seconds) {
         this.userName = userName;
         this.simulationName = simulationName;
         this.simulationAmount = simulationAmount;
@@ -19,6 +21,16 @@ public class RequestDTO {
         this.requestStatus = requestStatus;
         this.runningCount = runningCount;
         this.endedCount = endedCount;
+        this.ticks = ticks;
+        this.seconds = seconds;
+    }
+
+    public Integer getTicks() {
+        return ticks;
+    }
+
+    public Integer getSeconds() {
+        return seconds;
     }
 
     public String getUserName() {

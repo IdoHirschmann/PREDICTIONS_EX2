@@ -31,7 +31,7 @@ public class NewSimulationRunReq {
         simulationAmount = newRequestDTO.getSimulationAmount();
         isByUser = newRequestDTO.getByUser();
         terminationTicksSecondsDTO = newRequestDTO.getTerminationTicksSecondsDTO();
-        requestStatus = RequestStatus.APPROVED;
+        requestStatus = RequestStatus.PENDING;
         //todo - chane to PENDING after testing
         this.id = id;
     }
