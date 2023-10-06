@@ -67,6 +67,14 @@ public class NewSimulationRunReq {
         return id;
     }
 
+    public void decline(){
+        requestStatus = RequestStatus.DECLINE;
+    }
+
+
+    public void approve(){
+        requestStatus = RequestStatus.APPROVED;
+    }
     public TerminationTicksSecondsDTO getTerminationTicksSecondsDTO() {
         return terminationTicksSecondsDTO;
     }

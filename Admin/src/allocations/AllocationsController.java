@@ -1,5 +1,7 @@
 package allocations;
 
+import allocations.requestDone.requestAccept.RequestAcceptController;
+import allocations.requestDone.requestDecline.RequestDeclineController;
 import allocations.requestOngoing.RequestOngoingController;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -38,7 +40,7 @@ public class AllocationsController {
                 try {
                     // Create a GET request
                     Request request = new Request.Builder()
-                            .url("http://localhost:8080/Predictions/get_pending_req")
+                            .url("http://localhost:8080/Predictions/get_sim_reqs")
                             .build();
 
                     // Send the GET request
@@ -57,22 +59,42 @@ public class AllocationsController {
                     e.printStackTrace();
                 }
             }
-        }, 0, 1000);
+        }, 0, 2000);
     }
 
     private void updateData(List<RequestDTO> lst) {
         requestOngoingHBox.getChildren().clear();
+        requestDoneHBox.getChildren().clear();
 
         lst.forEach((requestDTO)->{
             try {
+                if(requestDTO.getRequestStatus().toString().equals("PENDING")){
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/allocations/requestOngoing/RequestOngoing.fxml"));
+                    Parent ongoingContent = loader.load();
+                    RequestOngoingController requestOngoingController = loader.getController();
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/allocations/requestOngoing/RequestOngoing.fxml"));
-                Parent ongoingContent = loader.load();
-                RequestOngoingController requestOngoingController = loader.getController();
+                    requestOngoingController.setData(requestDTO);
+                    requestOngoingController.setId(requestDTO.getId());
 
-                requestOngoingController.setData(requestDTO);
+                    requestOngoingHBox.getChildren().add(ongoingContent);
+                } else if (requestDTO.getRequestStatus().toString().equals("APPROVED")) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/allocations/requestDone/requestAccept/RequestAccept.fxml"));
+                    Parent approvedContent = loader.load();
+                    RequestAcceptController requestAcceptController = loader.getController();
 
-                requestOngoingHBox.getChildren().add(ongoingContent);
+                    requestAcceptController.setData(requestDTO);
+
+                    requestDoneHBox.getChildren().add(approvedContent);
+                }else {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/allocations/requestDone/requestDecline/RequestDecline.fxml"));
+                    Parent declinedContent = loader.load();
+                    RequestDeclineController requestDeclineController = loader.getController();
+
+                    requestDeclineController.setData(requestDTO);
+
+                    requestDoneHBox.getChildren().add(declinedContent);
+                }
+
 
             } catch (IOException e) {
             }

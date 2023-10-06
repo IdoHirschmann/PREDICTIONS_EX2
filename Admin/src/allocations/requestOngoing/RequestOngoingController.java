@@ -10,9 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.*;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -38,6 +36,8 @@ public class RequestOngoingController {
     private Label ticksLabel;
     @FXML
     private Label userNameLabel;
+    private Integer id;
+    private OkHttpClient client = new OkHttpClient().newBuilder().build();
 
     public void setData(RequestDTO requestDTO){
         simulationNameLabel.setText(requestDTO.getSimulationName());
@@ -68,13 +68,34 @@ public class RequestOngoingController {
 
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @FXML
-    void AcceptButtonClicked(ActionEvent event) {
+    void AcceptButtonClicked(ActionEvent event) throws IOException {
+        String url = "http://localhost:8080/Predictions/approve_req?id=" + id.toString();
+
+        MediaType mediaType = MediaType.parse("text/plain");
+        RequestBody body = RequestBody.create(mediaType, "");
+        Request request = new Request.Builder()
+                .url(url)
+                .method("PUT", body)
+                .build();
+        Response response = client.newCall(request).execute();
 
     }
     @FXML
-    void DeclineButtonClicked(ActionEvent event) {
+    void DeclineButtonClicked(ActionEvent event) throws IOException {
+        String url = "http://localhost:8080/Predictions/decline_req?id=" + id.toString();
 
+        MediaType mediaType = MediaType.parse("text/plain");
+        RequestBody body = RequestBody.create(mediaType, "");
+        Request request = new Request.Builder()
+                .url(url)
+                .method("PUT", body)
+                .build();
+        Response response = client.newCall(request).execute();
     }
 
 }

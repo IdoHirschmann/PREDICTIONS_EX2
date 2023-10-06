@@ -78,7 +78,7 @@ FilesManager {
     }
 
     public void addSimulationRunReq(NewRequestDTO newSimulationRunReq){
-        simulationRunReqMap.put(currReqId++, new NewSimulationRunReq(newSimulationRunReq, currReqId));
+        simulationRunReqMap.put(currReqId++, new NewSimulationRunReq(newSimulationRunReq, currReqId - 1));
     }
     public RequestListDTO getRequestForUser(String userName) {
         List<RequestDTO> requestDTOList = new ArrayList<>();
@@ -90,6 +90,10 @@ FilesManager {
         });
 
         return new RequestListDTO(requestDTOList);
+    }
+
+    public NewSimulationRunReq getReq(Integer id){
+        return simulationRunReqMap.get(id);
     }
 
     private RequestDTO extractReqDTOFromReq(NewSimulationRunReq req) {
@@ -117,6 +121,16 @@ FilesManager {
 
         return new RequestListDTO(lst);
     }
+    public RequestListDTO getReqList() {
+        List<RequestDTO> lst = new ArrayList<>();
+
+        simulationRunReqMap.forEach((key,req)-> {
+            lst.add(extractReqDTOFromReq(req));
+        });
+
+        return new RequestListDTO(lst);
+    }
+
     public void addUser(String userName){
         usersList.add(userName);
     }
