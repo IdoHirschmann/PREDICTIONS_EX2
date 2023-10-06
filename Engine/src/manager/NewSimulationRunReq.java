@@ -26,13 +26,12 @@ public class NewSimulationRunReq {
     }
 
     public NewSimulationRunReq(NewRequestDTO newRequestDTO , Integer id){
-        userName = newRequestDTO.getSimulationName();
+        userName = newRequestDTO.getUserName();
         simulationName = newRequestDTO.getSimulationName();
         simulationAmount = newRequestDTO.getSimulationAmount();
         isByUser = newRequestDTO.getByUser();
         terminationTicksSecondsDTO = newRequestDTO.getTerminationTicksSecondsDTO();
         requestStatus = RequestStatus.PENDING;
-        //todo - chane to PENDING after testing
         this.id = id;
     }
 

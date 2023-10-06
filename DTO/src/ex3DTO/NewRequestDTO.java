@@ -21,6 +21,10 @@ public class NewRequestDTO {
         return simulationName;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
     public Integer getSimulationAmount() {
         return simulationAmount;
     }

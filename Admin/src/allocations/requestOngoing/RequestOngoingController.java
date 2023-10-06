@@ -49,8 +49,20 @@ public class RequestOngoingController {
             ticksLabel.setText("----");
             byUserLabel.setText("True");
         }else {
-            secondsLabel.setText(requestDTO.getSeconds().toString());
-            ticksLabel.setText(requestDTO.getTicks().toString());
+            if(requestDTO.getSeconds() != null){
+                secondsLabel.setText(requestDTO.getSeconds().toString());
+            }
+            else{
+                secondsLabel.setText("----");
+            }
+
+            if(requestDTO.getTicks() != null){
+                ticksLabel.setText(requestDTO.getTicks().toString());
+            }
+            else{
+                ticksLabel.setText("----");
+            }
+
             byUserLabel.setText("False");
         }
 

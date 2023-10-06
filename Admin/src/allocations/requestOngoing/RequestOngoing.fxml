@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="120.0" maxWidth="640.0" minHeight="120.0" minWidth="640.0" prefHeight="120.0" prefWidth="640.0" spacing="30.0" stylesheets="@RequestOngoingStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RequestOngoingController">
+<HBox id="onGoingHBox" maxHeight="120.0" maxWidth="620.0" minHeight="120.0" minWidth="620.0" prefHeight="120.0" prefWidth="620.0" spacing="20.0" stylesheets="@RequestOngoingStyle.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="allocations.requestOngoing.RequestOngoingController">
    <children>
       <VBox maxHeight="120.0" maxWidth="280.0" minHeight="120.0" minWidth="280.0" prefHeight="120.0" prefWidth="280.0">
          <children>
